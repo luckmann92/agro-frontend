@@ -1,0 +1,147 @@
+body {
+	margin: 0;
+	padding: 0;
+	font-family: "Roboto", Arial, Helvetica, sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 16px;
+	line-height: 20px;
+	color: $c-gray2;
+	background-color: #FBFAFC;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+.container {
+	width: 800px;
+	max-width: 90%;
+	margin: 0 auto;
+}
+.content {
+	margin-top: 36px;
+}
+
+button,
+.btn {
+	font-family: "Roboto", Arial, Helvetica, sans-serif;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 16px;
+	line-height: 20px;
+	text-decoration: none;
+	background-color: transparent;
+	border: 1px solid $c-gray2;
+	border-radius: 8px;
+	color: $c-gray2;
+	padding: 10px 22px;
+	cursor: pointer;
+}
+.btn {
+	&--disabled {
+		opacity: 0.4;
+		pointer-events: none;
+	}
+	&--dark {
+		background-color: #494F57;
+		color: #F7FAFE;
+	}
+	&--detail {
+		display: flex;
+		align-items: center;
+		border: none;
+		padding: 0;
+		font-weight: 400;
+
+		.icon {
+			width: 24px;
+			height: 24px;
+			margin-right: 8px;
+			display: inline-block;
+			background: url("./../img/chevron_detail.svg") no-repeat center / contain;
+		}
+	}
+}
+.btn-wrap {
+	display: flex;
+	gap: 16px;
+}
+
+.title {
+	font-weight: 500;
+	font-size: 24px;
+	line-height: 100%;
+	margin-bottom: 36px;
+}
+p {
+	margin: 0;
+	padding: 0;
+}
+
+.txt {
+	font-size: 16px;
+}
+.txt-sml {
+	font-size: 14px;
+	line-height: 100%;
+}
+.txt-mdl {
+	font-size: 20px;
+	font-weight: 500;
+}
+.txt-block {
+	font-size: 16px;
+
+	p:first-child {
+		color: #828282;
+		margin-bottom: 8px;
+	}
+}
+
+.card {
+	border-radius: 12px;
+	border: 1px solid $br-gray;
+	padding: 16px;
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+
+	.top {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+	}
+	.bottom {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+	}
+	.divider {
+		width: 100%;
+		border-top: 1px solid $br-gray;
+	}
+
+	//&__detail {}
+	&__detail-content {
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
+	}
+}
+
+.flex-block {
+	display: flex;
+	&--ai-c {
+		align-items: center;
+	}
+	&--jc-sb {
+		justify-content: space-between;
+	}
+	&--fd-c {
+		flex-direction: column;
+	}
+	&--g20 {
+		gap: 20px;
+	}
+}

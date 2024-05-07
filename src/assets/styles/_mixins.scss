@@ -1,0 +1,29 @@
+@mixin l {
+	@media (min-width: 1920px) { @content; }
+}
+@mixin d {
+	@media (min-width: 1024px) and (max-width: 1680px) { @content; }
+}
+@mixin t {
+	@media (min-width: 768px) and (max-width: 1023px) { @content; }
+}
+@mixin m {
+  @media (min-width: 320px) and (max-width: 767px) { @content; }
+}
+
+@mixin scrollbar () {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(var(--primary));
+
+  &::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    opacity: 0;
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 16px;
+    width: 4px;
+    background: rgba(var(--primary));
+  }
+}

@@ -6,6 +6,7 @@
     :href="href"
 		:disabled="disabled"
 	>
+    <span v-if="variant === 'wait'" class="loader" />
 		<slot />
 	</component>
 </template>

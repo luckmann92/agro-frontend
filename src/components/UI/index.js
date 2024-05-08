@@ -1,9 +1,9 @@
 import UButton from "@/components/UI/UButton";
-import UButtonDetail from "@/components/UI/UButtonDetail";
+import UCard from "@/components/UI/UCard";
 import UField from "@/components/UI/UField";
 
 export default [
     UButton,
-    UButtonDetail,
+    UCard,
     UField
 ]

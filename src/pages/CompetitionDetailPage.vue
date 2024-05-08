@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <div class="btn-wrap flex-block flex-block--jc-sb">
+    <div class="fb fb--jc-sb">
       <u-button @click="$router.back()">Вернуться</u-button>
       <u-button :disabled="true">Подать заявку</u-button>
     </div>

@@ -8,7 +8,7 @@
         <router-link to="/ui">UI</router-link>
       </div>
       <div class="header__right">
-        <router-link to="/auth" class="header__button">Войти</router-link>
+        <u-button href="/auth" class="header__button">Войти</u-button>
       </div>
 		</div>
   </div>

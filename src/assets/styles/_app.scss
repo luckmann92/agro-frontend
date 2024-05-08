@@ -62,6 +62,35 @@ button,
 			background: url("./../img/chevron_detail.svg") no-repeat center / contain;
 		}
 	}
+	&--wait {
+		color: transparent;
+		position: relative;
+		pointer-events: none;
+
+		.loader {
+			position: absolute;
+			top: calc(50% - 10px);
+			left: calc(50% - 10px);
+			width: 20px;
+			height: 20px;
+			border: 1px solid $c-gray2;
+			//border-top-color: transparent;
+			border-bottom-color: transparent;
+			border-radius: 50%;
+			display: inline-block;
+			box-sizing: border-box;
+			animation: rotation 1s linear infinite;
+		}
+		@keyframes rotation {
+			0% {
+				transform: rotate(0deg);
+			}
+			100% {
+				transform: rotate(360deg);
+			}
+		}
+
+	}
 }
 .btn-wrap {
 	display: flex;
@@ -95,8 +124,12 @@ p {
 
 	p:first-child {
 		color: #828282;
+		//margin-bottom: 8px;
+	}
+	p:not(last-child) {
 		margin-bottom: 8px;
 	}
+
 }
 
 .card {
@@ -122,15 +155,24 @@ p {
 		border-top: 1px solid $br-gray;
 	}
 
-	//&__detail {}
+	&__detail {
+
+		&.show-detail {
+			.btn .icon {
+				transform: scaleY(-1);
+				transition: transform 300ms;
+			}
+		}
+	}
 	&__detail-content {
 		display: flex;
 		flex-direction: column;
 		gap: 20px;
+		margin-top: 20px;
 	}
 }
 
-.flex-block {
+.fb {
 	display: flex;
 	&--ai-c {
 		align-items: center;
@@ -145,3 +187,5 @@ p {
 		gap: 20px;
 	}
 }
+
+

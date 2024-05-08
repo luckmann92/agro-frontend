@@ -1,35 +1,33 @@
 <template>
 	<div class="competition-item">
-		<div class="card">
-			<div class="top">
-				<div class="txt-block">
-					<p class="txt-sml">Дата начала аренды</p>
-					<p>{{itemData?.DATE_FROM}}</p>
-				</div>
-				<div class="txt-block">
-					<p class="txt-sml">Дата объявления</p>
-					<p>{{itemData?.DATE_ANNONCE}}</p>
-				</div>
-				<div class="txt-block">
-					<p class="txt-sml">Дата проведения</p>
-					<p>{{itemData?.DATE_EVENT}}</p>
-				</div>
-				<u-button :disabled="true">Подать заявку</u-button>
-			</div>
+    <u-card>
+      <div class="top">
+        <div class="txt-block">
+          <p class="txt-sml">Дата начала аренды</p>
+          <p>{{itemData?.DATE_FROM}}</p>
+        </div>
+        <div class="txt-block">
+          <p class="txt-sml">Дата объявления</p>
+          <p>{{itemData?.DATE_ANNONCE}}</p>
+        </div>
+        <div class="txt-block">
+          <p class="txt-sml">Дата проведения</p>
+          <p>{{itemData?.DATE_EVENT}}</p>
+        </div>
+        <u-button :disabled="true">Подать заявку</u-button>
+      </div>
       <div class="divider"></div>
-			<div class="bottom">
-				<div class="txt-block">
-					<p class="txt-sml">Область: {{itemData?.PLACE}}</p>
-					<p class="txt-mdl">{{itemData?.NAME}}</p>
-				</div>
+      <div class="bottom">
+        <div class="txt-block">
+          <p class="txt-sml">Область: {{itemData?.PLACE}}</p>
+          <p class="txt-mdl">{{itemData?.NAME}}</p>
+        </div>
         <div class="btn-wrap">
           <u-button>Показать на карте</u-button>
           <u-button href="/competition/23">Подробнее</u-button>
-
-<!--          <router-link to="" >Подробнее</router-link>-->
         </div>
-			</div>
-		</div>
+      </div>
+    </u-card>
 	</div>
 </template>
 

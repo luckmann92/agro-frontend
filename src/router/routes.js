@@ -2,6 +2,7 @@ const UI = () => import(/* webpackChunkName: "ui" */'../pages/UI')
 const Index = () => import(/* webpackChunkName: "index-page" */'../pages/Index')
 const CompetitionDetailPage = () => import(/* webpackChunkName: "competition-detail-page" */'../pages/CompetitionDetailPage')
 const Auth = () => import(/* webpackChunkName: "auth-page" */'../pages/Auth')
+const ApplicationPage = () => import(/* webpackChunkName: "application-page" */'../pages/ApplicationPage')
 
 const routes = [
     {
@@ -42,14 +43,25 @@ const routes = [
     },
     {
         path: '/auth',
-        name: 'auth',
+        name: 'Auth',
         meta: {
             isShowNavigation: false,
             layout: 'AuthLayout',
             requiresAuth: false,
-            title: 'Личный кабинет Жителя | УК Культура'
+            title: 'Личный кабинет | АГРО'
         },
         component: Auth,
+    },
+    {
+        path: '/applications',
+        name: 'ApplicationPage',
+        meta: {
+            isShowNavigation: false,
+            layout: 'DefaultLayout',
+            requiresAuth: true,
+            title: 'Заявки кандидатов | АГРО'
+        },
+        component: ApplicationPage,
     },
 ]
 

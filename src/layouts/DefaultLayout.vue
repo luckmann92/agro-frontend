@@ -1,6 +1,6 @@
 <template>
   <header-top />
-  <header-bottom />
+  <header-bottom v-if="$route.path === '/' || $route.path === '/ui'" />
 
   <main class="main">
     <router-view/>

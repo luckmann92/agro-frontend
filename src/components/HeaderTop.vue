@@ -1,14 +1,19 @@
 <template>
   <div class="header">
 		<div class="container">
-      <div class="header__logo">
+      <div v-if="$route.path === '/'" class="header__logo">
         <img src="./../assets/logo.png" alt="logo">
       </div>
+      <router-link v-else to="/" class="header__logo">
+        <img src="./../assets/logo.png" alt="logo">
+      </router-link>
       <div class="header__nav">
         <router-link to="/ui">UI</router-link>
+        <router-link to="/applications">МинСельХоз</router-link>
       </div>
       <div class="header__right">
-        <u-button href="/auth" class="header__button">Войти</u-button>
+        <div v-if="$route.path === '/applications'" class="header__user">Кульбаев Марат Макашевич</div>
+        <u-button href="/auth" class="header__button">{{$route.path === '/applications' ? 'Выйти' : 'Войти'}}</u-button>
       </div>
 		</div>
   </div>
@@ -36,6 +41,8 @@ export default {
   }
 
   &__logo {
+    position: relative;
+    z-index: 2;
     width: 46px;
     height: 45px;
     display: flex;
@@ -68,6 +75,12 @@ export default {
   &__right {
     position: relative;
     z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  &__user {
+    font-weight: 500;
   }
   &__button {
     height: 100%;

@@ -46,10 +46,6 @@ export default {
   //  margin-bottom: 36px;
   //}
 
-  .list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
+
 }
 </style>

@@ -1,15 +1,22 @@
 <template>
-  <div class="list">
-    <competition-item v-for="item in list" :key="item.ID" :itemData="item"/>
+  <div class="container">
+    <div class="competition-list">
+      <div class="title">Конкурсы</div>
+
+
+      <div class="list">
+        <user-competition-item v-for="item in list" :key="item.ID" :itemData="item"/>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import CompetitionItem from './CompetitionItem.vue'
+import UserCompetitionItem from './UserCompetitionItem.vue'
 export default {
-  name: 'CompetitionList',
+  name: 'UserCompetitionList',
 	components: {
-		CompetitionItem
+		UserCompetitionItem
 	},
   props: {
 		list: {

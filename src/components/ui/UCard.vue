@@ -3,8 +3,8 @@
 
     <slot />
 
-    <div v-if="$slots.detail" :class="['card__detail', { 'show-detail': showDetail }]">
-      <button :class="['btn btn--detail']" @click="toggleShowDetail">
+    <div v-if="$slots.detail" :class="['card__detail']">
+      <button :class="['btn btn--detail', { 'show-detail': showDetail }]" @click="toggleShowDetail">
         <span class="icon" />
         Подробнее
       </button>
@@ -14,6 +14,15 @@
         <slot name="detail"/>
       </div>
     </div>
+
+    <div v-if="$slots.list" :class="['card__list']">
+      <slot name="list"/>
+    </div>
+
+    <div v-if="$slots.docs" :class="['card__docs']">
+      <slot name="docs"/>
+    </div>
+
   </div>
 </template>
 

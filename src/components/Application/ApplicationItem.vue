@@ -12,28 +12,31 @@
         </div>
       </div>
 
-      <div class="doc-list">
-        <template v-for="(doc, index) in itemData?.DOCS" :key="doc.ID">
-          <div v-if="(!showAll && index < 3) || showAll" class="doc-item">
-            <div class="fb fb--ai-c fb--jc-sb">
-              <p class="doc-name">{{doc?.FILE_NAME}}</p>
-              <a :href="doc?.FILE_SRC || '#'" target="_blank" class="btn">Читать</a>
-            </div>
-          </div>
-        </template>
+      <u-doc-list :docs="itemData?.DOCS" :showNum="4" />
 
-        <button :class="['btn btn--detail']" @click="toggleShowAll">
-          <span class="icon" />
-          {{ showAll ? 'Закрыть' : 'Показать все документы' }}
-        </button>
+      <!-- <div class="doc-list">
+        <template v-for="(doc, index) in itemData?.DOCS" :key="doc.ID">
+          <transition name="fade-item">
+            <div v-if="(!showAll && index < 3) || showAll" class="doc-item">
+              <div class="fb fb--ai-c fb--jc-sb">
+                <p class="doc-name">{{doc?.FILE_NAME}}</p>
+                <a :href="doc?.FILE_SRC || '#'" target="_blank" class="btn">Читать</a>
+              </div>
+            </div>
+          </transition>
+        </template>
       </div>
+
+      <button :class="['btn btn--detail']" @click="toggleShowAll">
+        <span class="icon" />
+        {{ showAll ? 'Закрыть' : 'Показать все документы' }}
+      </button> -->
     </u-card>
   </div>
 </template>
 
 <script>
 // import UButton from "../ui/UButton";
-
 import {ref} from "vue";
 
 export default {
@@ -72,12 +75,14 @@ export default {
 
 <style lang="scss" src="@/assets/styles/styles.scss"/>
 <style scoped lang="scss">
-.doc-list {
-  display: flex;
-  flex-direction: column;
+
+.fade-item-enter-active,
+.fade-item-leave-active {
+  transition: opacity 0.5s ease;
 }
-.doc-item {
-  padding: 20px 0;
-  border-top: 1px solid #F2F2F2;
+
+.fade-item-enter-from,
+.fade-item-leave-to {
+  opacity: 0;
 }
 </style>

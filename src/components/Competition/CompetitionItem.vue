@@ -1,7 +1,7 @@
 <template>
 	<div class="competition-item">
     <u-card>
-      <div class="top">
+      <div class="top txt-gray">
         <div class="txt-block">
           <p class="txt-sml">Дата начала аренды</p>
           <p>{{itemData?.DATE_FROM}}</p>
@@ -19,12 +19,12 @@
       <div class="divider"></div>
       <div class="bottom">
         <div class="txt-block">
-          <p class="txt-sml">Область: {{itemData?.PLACE}}</p>
+          <p class="txt-sml txt-gray">Область: {{itemData?.PLACE}}</p>
           <p class="txt-mdl">{{itemData?.NAME}}</p>
         </div>
         <div class="btn-wrap">
           <u-button>Показать на карте</u-button>
-          <u-button href="/competition/23">Подробнее</u-button>
+          <u-button href="/23">Подробнее</u-button>
         </div>
       </div>
     </u-card>
@@ -57,7 +57,8 @@ export default {
 </script>
 
 <style lang="scss" src="@/assets/styles/styles.scss"/>
-<style scoped lang="scss">
+<style lang="scss" scoped>
+//@import '../../assets/styles/styles';
 .competition-item {
 
 	.card {

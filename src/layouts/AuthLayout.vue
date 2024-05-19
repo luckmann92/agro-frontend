@@ -1,6 +1,6 @@
 <template>
   <section class="auth-page">
-    <v-logo class="auth-page__logo"/>
+    <!-- <v-logo class="auth-page__logo"/> -->
     <div class="auth-page__container">
       <router-view/>
     </div>

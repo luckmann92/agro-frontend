@@ -10,6 +10,9 @@
 @mixin m {
   @media (min-width: 320px) and (max-width: 767px) { @content; }
 }
+@mixin hover {
+  @media (hover: hover) and (pointer: fine) { @content; }
+}
 
 @mixin scrollbar () {
   scrollbar-width: thin;
@@ -25,5 +28,17 @@
     border-radius: 16px;
     width: 4px;
     background: rgba(var(--primary));
+  }
+}
+
+@keyframes jumping {
+  0%   {
+    transform: translateY(-5px);
+  }
+  35%  {
+    transform: translateY(0)
+  }
+  100% {
+    transform: translateY(5px)
   }
 }

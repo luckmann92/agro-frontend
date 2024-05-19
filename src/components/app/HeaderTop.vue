@@ -2,17 +2,25 @@
   <div class="header">
 		<div class="container">
       <div v-if="$route.path === '/'" class="header__logo">
-        <img src="./../assets/logo.png" alt="logo">
+        <img src="./../../assets/img/logo.png" alt="logo">
       </div>
       <router-link v-else to="/" class="header__logo">
-        <img src="./../assets/logo.png" alt="logo">
+        <img src="./../../assets/img/logo.png" alt="logo">
       </router-link>
+
       <div class="header__nav">
-        <router-link to="/ui">UI</router-link>
-        <router-link to="/applications">МинСельХоз</router-link>
+        <template v-if="$route.path === '/'">
+          <router-link to="/ui">UI</router-link>
+          <router-link to="/applications">МинСельХоз</router-link>
+        </template>
+        <template v-else>
+          <router-link to="/applications">Заявки кандидатов</router-link>
+          <router-link to="/competition">Конкурсы</router-link>
+        </template>
       </div>
+
       <div class="header__right">
-        <div v-if="$route.path === '/applications'" class="header__user">Кульбаев Марат Макашевич</div>
+        <div v-if="$route.path != '/'" class="header__user">Кульбаев Марат Макашевич</div>
         <u-button href="/auth" class="header__button">{{$route.path === '/applications' ? 'Выйти' : 'Войти'}}</u-button>
       </div>
 		</div>
@@ -69,6 +77,11 @@ export default {
 
       &:hover {
         text-decoration: underline;
+      }
+
+      &.router-link-active {
+        color: #828282;
+        pointer-events: none;
       }
     }
   }

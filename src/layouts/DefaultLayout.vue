@@ -11,8 +11,8 @@
 // import { useRoute } from "vue-router";
 // import { useStore } from "../../store";
 // import { computed, onBeforeMount } from "vue";
-import HeaderTop from "@/components/HeaderTop";
-import HeaderBottom from "@/components/HeaderBottom";
+import HeaderTop from "@/components/app/HeaderTop";
+import HeaderBottom from "@/components/app/HeaderBottom";
 
 export default {
   name: "default-layout",

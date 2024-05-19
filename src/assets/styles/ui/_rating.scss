@@ -1,0 +1,57 @@
+.rating-row {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: 20px;
+
+	&__text {
+		flex: 0 1 500px;
+
+	}
+}
+
+.rating {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+
+  &__item {
+    display: inline-block;
+		width: 40px;
+		height: 40px;
+    padding: 3px;
+    font-size: 24px;
+    line-height: 1;
+    display: flex;
+		align-items: center;
+		justify-content: center;
+    background-color: transparent;
+		border: 1px solid $c-gray3;
+		border-radius: 50%;
+    transition: background-color .2s ease-out;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &.is-selected {
+      background-color: $c-gray5;
+    }
+
+    &.is-disabled {
+			display: none;
+
+			&:hover {
+				cursor: default;
+			}
+		}
+  }
+
+  &__checkbox {
+    position: absolute;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		height: 1px; width: 1px;
+		margin: -1px; padding: 0; border: 0;
+  }
+}

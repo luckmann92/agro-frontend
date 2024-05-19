@@ -1,8 +1,10 @@
 const UI = () => import(/* webpackChunkName: "ui" */'../pages/UI')
 const Index = () => import(/* webpackChunkName: "index-page" */'../pages/Index')
-const CompetitionDetailPage = () => import(/* webpackChunkName: "competition-detail-page" */'../pages/CompetitionDetailPage')
+const IndexDetail = () => import(/* webpackChunkName: "competition-detail-page" */'../pages/IndexDetail')
 const Auth = () => import(/* webpackChunkName: "auth-page" */'../pages/Auth')
-const ApplicationPage = () => import(/* webpackChunkName: "application-page" */'../pages/ApplicationPage')
+const UserApplicationPage = () => import(/* webpackChunkName: "user-application-page" */'../pages/UserApplicationPage')
+const UserCompetitionPage = () => import(/* webpackChunkName: "user-сompetition-page" */'../pages/UserCompetitionPage')
+const UserCompetitionDetailPage = () => import(/* webpackChunkName: "user-сompetition-detail-page" */'../pages/UserCompetitionDetailPage')
 
 const routes = [
     {
@@ -30,7 +32,7 @@ const routes = [
         component: Index
     },
     {
-        path: '/competition/:id',
+        path: '/:id',
         name: 'CompetitionDetailPage',
         meta: {
             isShowNavigation: false,
@@ -39,7 +41,7 @@ const routes = [
             pageName: 'Конкурсы',
             requiresAuth: true,
         },
-        component: CompetitionDetailPage
+        component: IndexDetail
     },
     {
         path: '/auth',
@@ -54,14 +56,36 @@ const routes = [
     },
     {
         path: '/applications',
-        name: 'ApplicationPage',
+        name: 'UserApplicationPage',
         meta: {
             isShowNavigation: false,
             layout: 'DefaultLayout',
             requiresAuth: true,
             title: 'Заявки кандидатов | АГРО'
         },
-        component: ApplicationPage,
+        component: UserApplicationPage,
+    },
+    {
+        path: '/competition',
+        name: 'UserCompetitionPage',
+        meta: {
+            isShowNavigation: false,
+            layout: 'DefaultLayout',
+            requiresAuth: true,
+            title: 'Конкурсы | АГРО'
+        },
+        component: UserCompetitionPage,
+    },
+    {
+        path: '/competition/:id',
+        name: 'UserCompetitionDetailPage',
+        meta: {
+            isShowNavigation: false,
+            layout: 'DefaultLayout',
+            requiresAuth: true,
+            title: 'Конкурс | АГРО'
+        },
+        component: UserCompetitionDetailPage,
     },
 ]
 

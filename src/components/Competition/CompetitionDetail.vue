@@ -1,6 +1,6 @@
 <template>
   <div class="competition-detail">
-    <div class="competition-detail__titles">
+    <div class="three-col-block mb-20">
       <div class="txt-block">
         <p class="txt-sml">Дата начала аренды</p>
         <p>{{ '24.08.24' }}</p>
@@ -73,15 +73,5 @@ export default {
 
 <style lang="scss" src="@/assets/styles/styles.scss"/>
 <style lang="scss" scoped>
-.competition-detail {
 
-  &__titles {
-    display: flex;
-    margin-bottom: 20px;
-
-    &>div {
-      width: 30%;
-    }
-  }
-}
 </style>

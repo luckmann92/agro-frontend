@@ -1,0 +1,30 @@
+
+// margins
+.mb-16 {
+  margin-bottom: 16px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+// flex-block
+.fb {
+  display: flex;
+  &--ai-c {
+    align-items: center;
+  }
+  &--jc-sb {
+    justify-content: space-between;
+  }
+  &--fd-c {
+    flex-direction: column;
+  }
+  &--g20 {
+    gap: 20px;
+  }
+}
+
+// text-colors
+.txt-gray {
+  color: #828282;
+}

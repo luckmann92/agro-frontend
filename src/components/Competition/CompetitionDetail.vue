@@ -17,7 +17,7 @@
 
     <u-card>
 
-      <template v-slot:default>
+      <template #default>
         <div class="top">
           <div class="txt-block">
             <p class="txt-sml">Область: {{ 'Чуйская' }}</p>
@@ -44,7 +44,7 @@
         </div>
       </template>
 
-      <template v-slot:detail>
+      <template #detail>
         <div class="txt-block">
           <p class="txt-sml">Фактическое размещение культур</p>
           <p>{{ '2023   Свекла' }}</p>

@@ -23,6 +23,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+	.btn + .form__text {
+		margin-top: 20px;
+	}
 }
 .register-btn {
   width: 328px;

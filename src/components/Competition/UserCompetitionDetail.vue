@@ -19,7 +19,7 @@
       </div>
 
       <u-card>
-        <template v-slot:default>
+        <template #default>
           <div class="top">
             <div class="txt-block">
               <p class="txt-sml  txt-gray">Область: {{ 'Чуйская' }}</p>
@@ -46,7 +46,7 @@
           </div>
         </template>
 
-        <template v-slot:detail>
+        <template #detail>
           <div class="txt-block">
             <p class="txt-sml">Фактическое размещение культур</p>
             <p>{{ '2023   Свекла' }}</p>
@@ -70,14 +70,14 @@
           <div class="txt txt-gray">{{ detail?.WINNER?.USER_POSITION }}</div>
         </div>
 
-        <template v-slot:list>
+        <template #list>
           <div v-for="item in detail?.WINNER?.ITEMS" :key="item?.ID" class="rating-row">
             <div class="rating-row__text" v-html="item?.TEXT" />
             <u-rating :value="item?.RATING" :isEdit="false" />
           </div>
         </template>
 
-        <template v-slot:docs>
+        <template #docs>
           <u-doc-list :docs="detail?.WINNER?.DOCS" :showNum="0" />
         </template>
 
@@ -92,14 +92,14 @@
           <div class="txt txt-gray">{{ candidat?.USER_POSITION }}</div>
         </div>
 
-        <template v-slot:list>
+        <template #list>
           <div v-for="item in candidat?.ITEMS" :key="item?.ID" class="rating-row">
             <div class="rating-row__text" v-html="item?.TEXT" />
             <u-rating :value="item?.RATING" :isEdit="false" />
           </div>
         </template>
 
-        <template v-slot:docs>
+        <template #docs>
           <u-doc-list :docs="candidat?.DOCS" :showNum="0" />
         </template>
       </u-card>

@@ -1,5 +1,5 @@
 <template>
-	<div :class="['field', { 'field--disabled': disabled, 'field--labeled': $slots.default, 'field--error': error }]">
+	<div :class="['field', { 'field--disabled': disabled, 'field--error': error }]">
 		<label
       :id="`label-${id}`"
       :for="id"
@@ -81,33 +81,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.field {
-  display: flex;
-  flex-direction: column;
 
-  &__label {
-    margin-bottom: 8px;
-    font-size: 14px;
-    line-height: 18px;
-    padding: 0 12px;
-    color: #6A7686;
-  }
-  &__input {
-    margin-bottom: 32px;
-    font-size: 16px;
-    line-height: 20px;
-    border: 1px solid #D4D7DC;
-    border-radius: 8px;
-    padding: 14px 12px;
-    width: 328px;
-
-    &:focus {
-      outline: none;
-    }
-    &::placeholder {
-      color: #6A7686;
-    }
-  }
-
-}
 </style>

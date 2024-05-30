@@ -25,7 +25,7 @@
 import {ref, computed} from "vue";
 
 export default {
-  name: 'UCodeField',
+  name: 'UFieldCode',
   data: () => ({
     length: 4,
   }),
@@ -74,10 +74,11 @@ export default {
     const goto = (n) => {
       console.log('goto:n', n);
       if (!n || n > props.codeLength) {
-        n = 1
+        // n = 1
+        return
       }
       let el = document.querySelector(`input[name=code${n}]`)
-      console.log('el', el)
+      console.log('el', el.name)
       el.focus()
     }
     // const check = () => {
@@ -99,43 +100,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.code-field {
-  width: 328px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 20px;
 
-  &__input {
-    margin-bottom: 32px;
-    font-size: 18px;
-    line-height: 20px;
-    border: 1px solid #D4D7DC;
-    border-radius: 8px;
-    padding: 14px 12px;
-    width: 56px;
-    height: 72px;
-    text-align: center;
-    -moz-user-select: -moz-none;
-    -khtml-user-select: none;
-    -webkit-user-select: none;
-  
-    /*
-      Introduced in IE 10.
-      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
-    */
-    -ms-user-select: none;
-    user-select: none;
-
-    &:focus {
-      outline: none;
-    }
-    &::placeholder {
-      color: #6A7686;
-    }
-  }
-
-}
-.unselectable {
-}
 </style>

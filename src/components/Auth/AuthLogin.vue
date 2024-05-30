@@ -20,7 +20,7 @@
 			</form>
 		</div>
 		<div class="register-btn">
-			<u-button @click="$emit('toRegister')">Зарегестрироваться</u-button>
+			<u-button @click.prevent="$emit('toRegister')">Зарегестрироваться</u-button>
 		</div>
 
 	</div>

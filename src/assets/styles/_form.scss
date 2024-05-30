@@ -11,5 +11,152 @@
     margin-bottom: 32px;
     text-align: center;
   }
-
 }
+
+.field {
+  display: flex;
+  flex-direction: column;
+
+  &__label {
+    margin-bottom: 8px;
+    font-size: 14px;
+    line-height: 18px;
+    padding: 0 12px;
+    color: #6A7686;
+  }
+  &__input {
+    margin-bottom: 32px;
+    font-size: 16px;
+    line-height: 20px;
+    border: 1px solid #D4D7DC;
+    border-radius: 8px;
+    padding: 14px 12px;
+    width: 328px;
+
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: #6A7686;
+    }
+  }
+}
+
+.select {
+  margin-bottom: 32px;
+
+  &__output {
+    display: flex;
+    flex-direction: column;
+
+    font-size: 16px;
+    line-height: 20px;
+    border: 1px solid #D4D7DC;
+    border-radius: 8px;
+    padding: 14px 12px;
+    width: 328px;
+    cursor: pointer;
+
+    &:hover {
+      // background: var(--input-hover-background);
+      // border: var(--input-border-hover);
+    }
+  }
+
+  // &__selected-value {}
+
+  &__arrow {
+    position: absolute;
+    top: calc(50% - 12px);
+    right: 12px;
+
+    width: 24px;
+    height: 24px;
+    display: inline-block;
+    background: url("./../img/icons/chevron.svg") no-repeat center / contain;
+    transition: transform $speed;
+
+    &--up {
+      transform: scaleY(-1);
+    }
+  }
+
+  &__options-container {
+    position: absolute;
+    left: 5px;
+    right: 5px;
+
+    background: #FBFAFC;
+    box-shadow: 0 2px 12px 2px rgba(0, 0, 0, 0.09);
+    // border-radius: var(--input-border-radius);
+    z-index: 1000;
+    overflow: hidden;
+
+    &--up {
+      bottom: 100%;
+      top: auto;
+    }
+    &--down {
+      top: 100%;
+      bottom: auto;
+    }
+  }
+
+  &__options-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    max-height: 300px;
+    overflow: auto;
+  }
+
+  &__options-item {
+    padding: 14px 12px;
+    transition: background-color $speed;
+    cursor: pointer;
+
+    &:hover, &--selected {
+      background-color: $bg-gray;
+    }
+  }
+}
+
+.code-field {
+  width: 328px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  &__input {
+    margin-bottom: 32px;
+    font-size: 18px;
+    line-height: 20px;
+    border: 1px solid #D4D7DC;
+    border-radius: 8px;
+    padding: 14px 12px;
+    width: 56px;
+    height: 72px;
+    text-align: center;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+  
+    /*
+      Introduced in IE 10.
+      See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+    */
+    -ms-user-select: none;
+    user-select: none;
+
+    &:focus {
+      outline: none;
+    }
+    &::placeholder {
+      color: #6A7686;
+    }
+  }
+
+} 

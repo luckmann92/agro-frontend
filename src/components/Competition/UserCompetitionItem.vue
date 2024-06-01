@@ -3,8 +3,8 @@
     <u-card>
       <div class="top">
         <div class="txt-block">
-          <p class="txt-sml txt-gray">Область: {{itemData?.PLACE}}</p>
-          <p class="txt-mdl">{{itemData?.NAME}}</p>
+          <p class="txt txt-gray">{{ candidatesTitle }}</p>
+          <p class="txt"><b>Победитель: </b>{{ itemData?.WINNER }}</p>
         </div>
         <u-button :href="`/competition/${itemData?.ID}`">Подробнее</u-button>
       </div>
@@ -36,6 +36,8 @@
 </template>
 
 <script>
+import { computed } from "vue"
+import { declOfNum } from '@/utils'
 
 export default {
   name: 'UserCompetitionItem',
@@ -54,18 +56,19 @@ export default {
 			})
 		}
 	},
+  setup(props) {
+    const candidatesTitle = computed(() => {
+      return `${props.itemData.CANDIDATES_COUNTER} ${declOfNum(props.itemData.CANDIDATES_COUNTER, ['кандидат', 'кандидата', 'кандидатов'])}`
+    })
+
+    return {
+      candidatesTitle,
+    }
+  }
 }
 </script>
 
 <style lang="scss" src="@/assets/styles/styles.scss"/>
 <style scoped lang="scss">
-.competition-item {
 
-	.card {
-		display: flex;
-    flex-direction: column;
-
-
-	}
-}
 </style>

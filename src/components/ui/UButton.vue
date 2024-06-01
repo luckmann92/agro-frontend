@@ -6,7 +6,9 @@
     :href="href"
 		:disabled="disabled"
 	>
-    <span v-if="variant === 'wait'" class="loader" />
+    <span v-if="loading" class="loader" />
+    <span v-else-if="icon" :class="['icon', `icon--${icon}`]" />
+    <!-- <span v-if="variant === 'wait'" class="loader" /> -->
 		<slot />
 	</component>
 </template>
@@ -21,20 +23,25 @@ export default {
       type: String,
       required: false
     },
-		disabled: {
-      type: Boolean,
-      required: false,
-    },
     variant: {
       type: String,
       required: false,
       default: ''
     },
+    icon: {
+      type: String,
+      required: false,
+      default: '',
+    },
+		disabled: {
+      type: Boolean,
+      required: false,
+    },
     loading: {
       type: Boolean,
       required: false,
       default: false,
-    }
+    },
 	},
 	setup(props) {
     const computeComponent = computed(() => {

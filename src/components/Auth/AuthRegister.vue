@@ -37,10 +37,10 @@
 					<div class="form__title txt-mdl">Введите SMS-код</div>
 					<div class="form__text txt txt-gray">{{ phone }}</div>
 
+						<!-- :id="'auth-code'" -->
+						<!-- v-model="code" -->
 					<u-field-code
-						:id="'auth-code'"
-						v-model="code"
-						@update="updateCode"
+						@pinValid="validCode"
 					/>
 
 					<u-button :variant="'dark'" @click.prevent="verificationCode">Отправить</u-button>
@@ -84,9 +84,7 @@
 
 					<u-button :variant="'dark'" @click.prevent="verificationCode">Отправить</u-button>
 
-					<div v-if="currentTime > 0" class="form__text txt-sml txt-gray">
-						{{ timerText }}
-					</div>
+					<div v-if="currentTime > 0" class="form__text txt-sml txt-gray" v-html="timerText" />
 					<div v-else class="form__text txt-sml txt-gray" @click.prevent="getCode">
 						{{ timerText }}
 					</div>
@@ -103,18 +101,19 @@
 </template>
 
 <script>
-import { computed, watch, ref } from "vue";
+import { computed, watch, ref } from "vue"
 import { useVuelidate } from '@vuelidate/core'
 import { required, minLength, email } from '@vuelidate/validators'
 import axios from "axios";
-import { useProfile } from "@/store/profile";
+import { useProfile } from "@/store/profile"
+
 export default {
 	name: 'AuthRegister',
 	setup() {  
-    const showRegisterForm = ref(false)  
+    const showRegisterForm = ref(false)
     const profileStore = useProfile()
-    const fullName = ref(profileStore.fullName)
-    const phone = ref(profileStore.phone)
+    const fullName = ref(profileStore.profileInfo.fullName)
+    const phone = ref(profileStore.profileInfo.phone)
     const registerStep = ref(1)
     const code = ref('')
     const codeError = ref(false)
@@ -225,6 +224,12 @@ export default {
 			codeError.value = false
 		}
 
+		const validCode = (val) => {
+			console.log('Valid PIN:', val);
+			code.value = val
+			// Do something with the valid pin code
+		};
+
 		const verificationCode = () => {
 			console.log('code', code.value);
       if (code.value.length < 4) {
@@ -244,9 +249,9 @@ export default {
     }
 
 		const timerText = computed(() => {
-      let str = 'Запросить повторно код подтверждения'
+      let str = 'Запросить повторно код подтверждения '
       if (timer.value) {
-        str += ` через ${currentTime.value} сек.`
+        str += `<br/> через ${currentTime.value} сек.`
       }
       return str
     })
@@ -270,7 +275,7 @@ export default {
 			currentTime,
 
 			getCode,
-			updateCode,
+			validCode,
 			verificationCode,
 
 			region,

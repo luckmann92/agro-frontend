@@ -8,12 +8,13 @@ import { useLocalStorage } from "@vueuse/core";
 export const useProfile = defineStore(
   'profile',
   () => {
+    const router = useRouter()
     const profile = ref(useLocalStorage('user', {}));
     const authToken = ref(useLocalStorage('token', null))
     const isLoggedIn = ref(false);
     const loadingProfile = ref(true);
     const phone = ref('')
-    const router = useRouter()
+    const userType = ref('РУАР');
 
     // Проверка авторизации
     const checkAuth = () => {
@@ -44,7 +45,8 @@ export const useProfile = defineStore(
     }
 
     // записать авторизированного пользователя
-    const setUser = (data) => {
+    const setUser = (data, uType) => {
+      userType.value = uType
       profile.value = data
       profile.value.logged = true
       phone.value = profile.value?.fields?.find(field => field.TYPE_ID === 'PHONE')?.VALUE
@@ -84,6 +86,7 @@ export const useProfile = defineStore(
 
     return {
       id,
+      userType,
       profileInfo,
       authToken,
       phone,

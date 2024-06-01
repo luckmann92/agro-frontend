@@ -13,8 +13,16 @@
           <router-link to="/ui">UI</router-link>
           <router-link to="/applications">МинСельХоз</router-link>
         </template>
-        <template v-else>
+        <template v-else-if="userType === 'МСХ'">
           <router-link to="/applications">Заявки кандидатов</router-link>
+          <router-link to="/competition">Конкурсы</router-link>
+        </template>
+        <template v-else-if="userType === 'К'">
+          <router-link to="/applications">Конкурсы</router-link>
+          <router-link to="/competition">Мои документы</router-link>
+        </template>
+        <template v-else-if="userType === 'РУАР'">
+          <router-link to="/estate">Участки</router-link>
           <router-link to="/competition">Конкурсы</router-link>
         </template>
       </div>
@@ -28,9 +36,20 @@
 </template>
 
 <script>
+import { useProfile } from "@/store/profile"
+import { ref } from "vue"
+
 export default {
   name: 'HeaderTop',
   props: {},
+  setup() {
+    const profileStore = useProfile()
+    const userType = ref(profileStore.userType)
+
+    return {
+      userType
+    }
+  }
 }
 </script>
 
@@ -71,16 +90,22 @@ export default {
     align-items: center;
     justify-content: center;
     gap: 36px;
+    color: #828282;
+    white-space: nowrap;
     a {
       color: inherit;
       text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 300ms, border 300ms;
 
       &:hover {
-        text-decoration: underline;
+        color: #000;
+        border-bottom-color: inherit;
+        text-decoration: none;
       }
 
       &.router-link-active {
-        color: #828282;
+        color: #000;
         pointer-events: none;
       }
     }

@@ -5,29 +5,28 @@ const Auth = () => import(/* webpackChunkName: "auth-page" */'../pages/Auth')
 const UserApplicationPage = () => import(/* webpackChunkName: "user-application-page" */'../pages/UserApplicationPage')
 const UserCompetitionPage = () => import(/* webpackChunkName: "user-сompetition-page" */'../pages/UserCompetitionPage')
 const UserCompetitionDetailPage = () => import(/* webpackChunkName: "user-сompetition-detail-page" */'../pages/UserCompetitionDetailPage')
+const UserCompetitionNewPage = () => import(/* webpackChunkName: "user-сompetition-new-page" */'../pages/UserCompetitionNewPage')
+const UserEstatePage = () => import(/* webpackChunkName: "user-estate-page" */'../pages/UserEstatePage')
+const UserEstateNewPage = () => import(/* webpackChunkName: "user-estate-new-page" */'../pages/UserEstateNewPage')
 
 const routes = [
     {
         path: '/ui',
         name: 'UI',
         meta: {
-            isShowNavigation: false,
-            layout: 'DefaultLayout',
-            name: 'Интерфейс',
             requiresAuth: true,
+            layout: 'DefaultLayout',
             sitemap: { ignoreRoute: true },
         },
         component: UI
     },
     {
         path: '/',
-        name: 'index',
+        name: 'Index',
         meta: {
-            isShowNavigation: false,
+            requiresAuth: false,
             layout: 'DefaultLayout',
             title: 'Главная | АГРО',
-            pageName: 'Главная',
-            requiresAuth: true,
         },
         component: Index
     },
@@ -35,11 +34,9 @@ const routes = [
         path: '/:id',
         name: 'CompetitionDetailPage',
         meta: {
-            isShowNavigation: false,
+            requiresAuth: false,
             layout: 'DefaultLayout',
             title: 'Конкурсы | АГРО',
-            pageName: 'Конкурсы',
-            requiresAuth: true,
         },
         component: IndexDetail
     },
@@ -47,7 +44,6 @@ const routes = [
         path: '/auth',
         name: 'Auth',
         meta: {
-            isShowNavigation: false,
             layout: 'AuthLayout',
             requiresAuth: false,
             title: 'Личный кабинет | АГРО'
@@ -58,7 +54,6 @@ const routes = [
         path: '/applications',
         name: 'UserApplicationPage',
         meta: {
-            isShowNavigation: false,
             layout: 'DefaultLayout',
             requiresAuth: true,
             title: 'Заявки кандидатов | АГРО'
@@ -69,7 +64,6 @@ const routes = [
         path: '/competition',
         name: 'UserCompetitionPage',
         meta: {
-            isShowNavigation: false,
             layout: 'DefaultLayout',
             requiresAuth: true,
             title: 'Конкурсы | АГРО'
@@ -80,12 +74,41 @@ const routes = [
         path: '/competition/:id',
         name: 'UserCompetitionDetailPage',
         meta: {
-            isShowNavigation: false,
             layout: 'DefaultLayout',
             requiresAuth: true,
             title: 'Конкурс | АГРО'
         },
         component: UserCompetitionDetailPage,
+    },
+    {
+        path: '/competition/new',
+        name: 'UserCompetitionNewPage',
+        meta: {
+            layout: 'DefaultLayout',
+            requiresAuth: true,
+            title: 'Конкурс | АГРО'
+        },
+        component: UserCompetitionNewPage,
+    },
+    {
+        path: '/estate',
+        name: 'UserEstatePage',
+        meta: {
+            layout: 'DefaultLayout',
+            requiresAuth: true,
+            title: 'Участки | АГРО'
+        },
+        component: UserEstatePage,
+    },
+    {
+        path: '/estate/new',
+        name: 'UserEstateNewPage',
+        meta: {
+            layout: 'DefaultLayout',
+            requiresAuth: true,
+            title: 'Добавление участка | АГРО'
+        },
+        component: UserEstateNewPage,
     },
 ]
 

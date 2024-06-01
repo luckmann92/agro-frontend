@@ -19,8 +19,8 @@
       <u-button>Стандартная</u-button>
       <u-button :disabled="true">Неактивная</u-button>
       <u-button :variant="'dark'">Тёмная</u-button>
-      <u-button :variant="'wait'" title="Ожидание">Ожидание</u-button>
-      <u-button>Стандартная</u-button>
+      <u-button :variant="'dark'" :icon="'add'">Добавить</u-button>
+      <u-button :loading="true" title="Ожидание">Ожидание</u-button>
     </div>
   </div>
 </template>

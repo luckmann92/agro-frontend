@@ -4,9 +4,13 @@
       :id="`label-${id}`"
       :for="id"
       class="field__label"
-    >
-      {{ label }}
-    </label>
+      v-html="label"
+    />
+    <div 
+      v-if="labelYear"
+      class="field__label-year"
+      v-html="labelYear"
+    />
 		<input 
       :id="id"
       type="text"
@@ -18,6 +22,7 @@
       @blur="$emit('blur', $event)"
       @focus="$emit('focus', $event)"
 		/>
+    <slot />
 	</div>
 </template>
 
@@ -51,6 +56,11 @@ export default {
       default: '',
     },
     label: {
+      type: String,
+      required: false,
+      default: '',
+    },
+    labelYear: {
       type: String,
       required: false,
       default: '',

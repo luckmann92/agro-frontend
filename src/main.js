@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import components from '@/components/ui'
+import uiComponents from '@/components/ui'
 import router from "@/router"
 import axios from "axios";
 import { createPinia } from 'pinia'
@@ -21,8 +21,8 @@ axios.defaults.baseURL = '/api/v2/master-system';
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 
-components.forEach(component => {
-    app.component(component.name, component)
+uiComponents.forEach(item => {
+    app.component(item.name, item.component)
 })
 
 app

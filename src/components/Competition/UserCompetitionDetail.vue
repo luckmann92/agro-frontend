@@ -18,48 +18,7 @@
         </div>
       </div>
 
-      <u-card>
-        <template #default>
-          <div class="top">
-            <div class="txt-block">
-              <p class="txt-sml  txt-gray">Область: {{ 'Чуйская' }}</p>
-              <p class="txt-mdl">{{ 'Орашаемый' }}</p>
-            </div>
-            <div class="btn-wrap">
-              <u-button >Показать на карте</u-button>
-            </div>
-          </div>
-
-          <div class="three-col-block">
-            <div class="txt-block">
-              <p class="txt-sml txt-gray">Границы выставляемого участка</p>
-              <p>{{ '1 000' }}м&sup2;</p>
-            </div>
-            <div class="txt-block">
-              <p class="txt-sml txt-gray">Координаты</p>
-              <p>{{ '10 S 055974, 4282182' }}</p>
-            </div>
-            <div class="txt-block">
-              <p class="txt-sml txt-gray">Кадастровый номер</p>
-              <p>{{ '47:14:1203001:814' }}</p>
-            </div>
-          </div>
-        </template>
-
-        <template #detail>
-          <div class="txt-block">
-            <p class="txt-sml">Фактическое размещение культур</p>
-            <p>{{ '2023   Свекла' }}</p>
-            <p>{{ '2022   Свекла' }}</p>
-            <p>{{ '2021   Люцерна' }}</p>
-            <p>{{ '2020   Люцерна' }}</p>
-          </div>
-          <div class="txt-block">
-            <p class="txt-sml">Целевое использование земель</p>
-            <p>{{ 'Для засева культуры свеклы' }}</p>
-          </div>
-        </template>
-      </u-card>
+      <UserEstateitem />
     </div>
 
     <div class="competition-detail__winner">
@@ -80,7 +39,6 @@
         <template #docs>
           <u-doc-list :docs="detail?.WINNER?.DOCS" :showNum="0" />
         </template>
-
       </u-card>
     </div>
 
@@ -109,13 +67,13 @@
 </template>
 
 <script>
-import {computed} from "vue";
+import { computed } from "vue"
 import { declOfNum } from '@/utils'
-// import URatingRow from '@/common/URatingRow.vue'
+import UserEstateitem from '@/components/Estates/UserEstateItem.vue'
 
 export default {
   name: "UserCompetitionDetail",
-  components: {  },
+  components: { UserEstateitem },
   props: {
     detail: Object
   },
@@ -136,7 +94,7 @@ export default {
 
 <style lang="scss" src="@/assets/styles/styles.scss"/>
 <style lang="scss" scoped>
-.competition-detail {
+// .competition-detail {
 
   //&__titles {
   //  display: flex;
@@ -146,5 +104,5 @@ export default {
   //    width: 30%;
   //  }
   //}
-}
+// }
 </style>

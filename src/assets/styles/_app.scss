@@ -23,143 +23,29 @@ a {
 	width: 800px;
 	max-width: 90%;
 	margin: 0 auto;
+
+	&--full {
+		width: 1200px;
+	}
+	&--auto {
+		width: auto;
+	}
+}
+.content-top {
+	margin-bottom: 36px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
 .content {
 	margin-top: 36px;
-}
-
-button,
-.btn {
-	font-family: "Roboto", Arial, Helvetica, sans-serif;
-	font-style: normal;
-	font-weight: 500;
-	font-size: 16px;
-	line-height: 20px;
-	text-decoration: none;
-	background-color: transparent;
-	border: 1px solid $c-gray2;
-	border-radius: 8px;
-	color: $c-gray2;
-	padding: 10px 22px;
-	cursor: pointer;
-	transition: color $speed, background-color $speed;
-
-	// @include hover {
-	// 	&:hover {
-	// 		background-color: $bg-gray;
-	// 		//color: $c-gray2;
-	// 	}
-	// }
-}
-.btn {
-	&--disabled {
-		opacity: 0.4;
-		pointer-events: none;
-	}
-	&--dark {
-		background-color: #494F57;
-		color: #F7FAFE;
-
-		// @include hover {
-		// 	&:hover {
-		// 		background-color: $bg-gray;
-		// 		color: #494F57;
-		// 	}
-		// }
-	}
-	&--detail {
-		display: flex;
-		align-items: center;
-		border: none;
-		padding: 0;
-		font-weight: 400;
-
-		@include hover {
-			&:hover {
-				background-color: transparent;
-
-				//color: $c-gray2;
-			}
-		}
-
-		.icon {
-			width: 24px;
-			height: 24px;
-			margin-right: 8px;
-			display: inline-block;
-			background: url("./../img/icons/chevron.svg") no-repeat center / contain;
-		}
-
-		&.show-detail {
-			.icon {
-				transform: scaleY(-1);
-				transition: transform 300ms;
-			}
-		}
-	}
-	&--wait {
-		color: transparent;
-		position: relative;
-		pointer-events: none;
-
-		.loader {
-			position: absolute;
-			top: calc(50% - 10px);
-			left: calc(50% - 10px);
-			width: 20px;
-			height: 20px;
-			border: 1px solid $c-gray2;
-			//border-top-color: transparent;
-			border-bottom-color: transparent;
-			border-radius: 50%;
-			display: inline-block;
-			box-sizing: border-box;
-			animation: rotation 1s linear infinite;
-		}
-		@keyframes rotation {
-			0% {
-				transform: rotate(0deg);
-			}
-			100% {
-				transform: rotate(360deg);
-			}
-		}
-
-		/* HTML: <div class="loader"></div> */
-		//.loader {
-		//	width: 60px;
-		//	aspect-ratio: 4;
-		//	--_g: no-repeat radial-gradient(circle closest-side,#000 90%,#0000);
-		//	background:
-		//					var(--_g) 0%   50%,
-		//					var(--_g) 50%  50%,
-		//					var(--_g) 100% 50%;
-		//	background-size: calc(100%/3) 100%;
-		//	animation: l7 1s infinite linear;
-		//}
-		//@keyframes l7 {
-		//	33%{background-size:calc(100%/3) 0%  ,calc(100%/3) 100%,calc(100%/3) 100%}
-		//	50%{background-size:calc(100%/3) 100%,calc(100%/3) 0%  ,calc(100%/3) 100%}
-		//	66%{background-size:calc(100%/3) 100%,calc(100%/3) 100%,calc(100%/3) 0%  }
-		//}
-
-	}
-}
-.btn-wrap {
-	display: flex;
-	gap: 16px;
-
-	&--br-top {
-		padding-top: 20px;
-		border-top: 1px solid #D9D9D9;
-	}
 }
 
 .title {
 	font-weight: 500;
 	font-size: 24px;
 	line-height: 100%;
-	margin-bottom: 36px;
+	// margin-bottom: 36px;
 }
 .block-title {
 	// font-weight: 500;
@@ -201,6 +87,15 @@ p {
 	display: flex;
 	flex-direction: column;
 	gap: 16px;
+}
+
+.empty {
+	padding-top: 20vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 20px;
 }
 
 .card {

@@ -81,7 +81,7 @@ export default {
     value: {
       type: [Number, String],
       required: false,
-      default: null,
+      default: '',
     },
     loading: {
       type: Boolean,

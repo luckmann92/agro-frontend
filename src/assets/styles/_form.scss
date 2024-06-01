@@ -16,7 +16,8 @@
 .field {
   display: flex;
   flex-direction: column;
-
+  margin-bottom: 24px;
+  
   &__label {
     margin-bottom: 8px;
     font-size: 14px;
@@ -24,20 +25,31 @@
     padding: 0 12px;
     color: #6A7686;
   }
+  &__label-year {
+    margin-bottom: 8px;
+    font-size: 16px;
+    line-height: 20px;
+    font-weight: 500;
+    padding: 0 12px;
+    // color: #6A7686;
+  }
   &__input {
-    margin-bottom: 32px;
     font-size: 16px;
     line-height: 20px;
     border: 1px solid #D4D7DC;
     border-radius: 8px;
     padding: 14px 12px;
-    width: 328px;
+    width: 100%;
 
     &:focus {
       outline: none;
     }
     &::placeholder {
       color: #6A7686;
+    }
+
+    &+.btn {
+      margin-top: 12px;
     }
   }
 }
@@ -159,4 +171,26 @@
     }
   }
 
-} 
+  &__dots {
+    display: flex;
+    margin-left: 10px;
+  }
+
+  &__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #ccc;
+    margin: 0 5px;
+  }
+
+  &__dot--filled {
+    background-color: #333;
+  }
+}
+
+.radio-list {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}

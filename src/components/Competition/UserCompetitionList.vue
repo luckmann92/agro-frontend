@@ -1,18 +1,34 @@
 <template>
-  <div class="container">
-    <div class="competition-list">
-      <div class="title">Конкурсы</div>
 
+  <div v-if="list.length" class="container">
+		<div class="content-top">
+			<div class="title">Конкурсы</div>
+			<u-button v-if="userType === 'РУАР'" :href="'/competition/new'" :variant="'dark'" :icon="'add'">Добавить конкурс</u-button>
+		</div>
+		<div class="list">
+			<UserCompetitionItem 
+        v-for="item in list" 
+        :key="item.ID" 
+        :itemData="item" 
+      />
+		</div>
+	</div>
 
-      <div class="list">
-        <user-competition-item v-for="item in list" :key="item.ID" :itemData="item"/>
-      </div>
-    </div>
-  </div>
+  <div v-else class="competition-empty empty">
+		<div class="competition-logo">
+			<img src="./../../assets/img/competition.svg" alt="">
+		</div>
+		<div class="txt txt--gray">У вас нет участков</div>
+		<u-button v-if="userType === 'РУАР'" :href="'/competition/new'" :variant="'dark'" :icon="'add'">Добавить конкурс</u-button>
+	</div>
+
 </template>
 
 <script>
+import { ref } from "vue"
+import { useProfile } from "@/store/profile"
 import UserCompetitionItem from './UserCompetitionItem.vue'
+
 export default {
   name: 'UserCompetitionList',
 	components: {
@@ -24,29 +40,17 @@ export default {
 			default: () => []
 		}
 	},
+  setup() {
+    const profileStore = useProfile()
+    const userType = ref(profileStore.userType)
+
+    return {
+      userType
+    }
+  }
 }
 </script>
 
 <style lang="scss" src="@/assets/styles/styles.scss"/>
 <style lang="scss" scoped>
-.header-bottom {
-  background-color: #F2F2F2;
-  font-weight: 500;
-
-  .container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 12px 0;
-  }
-}
-.competition-list {
-  //margin-top: 44px;
-
-  //.title {
-  //  margin-bottom: 36px;
-  //}
-
-
-}
 </style>

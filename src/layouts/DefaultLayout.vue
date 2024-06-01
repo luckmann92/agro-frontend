@@ -34,6 +34,7 @@ export default {
 
 <style lang="scss" scoped>
 .main {
+  height: 100%;
   padding: 44px 0 60px;
 }
 </style>

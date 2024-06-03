@@ -47,6 +47,15 @@ export const useProfile = defineStore(
     // записать тип пользователя
     const setUserType = (uType) => {
       userType.value = uType
+      if (uType === 'МСХ') {
+        router.push('/application')
+      } else if (uType === 'К') {
+        router.push('/competition')
+      } else if (uType === 'РУАР') {
+        router.push('/estate')
+      } else {
+        router.push('/')
+      }
     }
     // записать авторизированного пользователя
     const setUser = (data) => {

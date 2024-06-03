@@ -19,7 +19,7 @@
         </template>
         <template v-else-if="userType === 'К'">
           <router-link to="/applications">Конкурсы</router-link>
-          <router-link to="/competition">Мои документы</router-link>
+          <router-link to="/documents">Мои документы</router-link>
         </template>
         <template v-else-if="userType === 'РУАР'">
           <router-link to="/estate">Участки</router-link>

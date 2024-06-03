@@ -17,11 +17,11 @@
 						:label="'ФИО'"
 						:placeholder="'Джураев Абдулфато Латифович'"
 					/>
-						<!-- :id="'auth-phone'"
-						v-model="phone" -->
+
 					<u-field-phone
 						:label="'Номер телефона'"
 						:placeholder="'+996 (990) 000 000'"
+						@update="updatePhone"
 					/>
 
 						<!-- :disabled="!v$.fullName.$error && !v$.phone.$error" -->
@@ -184,6 +184,16 @@ export default {
 			}
 		])
 
+		const updatePhone = (val) => {
+			console.log('updatePhone:val', val);
+			console.log('updatePhone:length', val.length);
+			phone.value = val
+		}
+
+		const phoneValid = computed(() => {
+			return phone.value.length === 18
+		})
+
 		const startTimer = () => {
       timer.value = setInterval(() => {
         currentTime.value--
@@ -288,6 +298,9 @@ export default {
 			timerText,
 			currentTime,
 
+			phoneValid,
+			updatePhone,
+			
 			getCode,
 			validCode,
 			verificationCode,

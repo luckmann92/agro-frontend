@@ -70,9 +70,9 @@ export default {
     return {
       showRegisterForm,
       phone,
-      login,
+			phoneValid,
 			updatePhone,
-			phoneValid
+      login,
 
     }
   }

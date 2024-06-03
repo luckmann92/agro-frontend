@@ -6,8 +6,8 @@
       :class="[
         'rating__item', 
         {
-          'is-selected': ((value >= rating) && value != null), 
-          'is-disabled': !isEdit && value != rating}
+          'is-selected': ((ratingValue >= rating) && ratingValue != null), 
+          'is-disabled': !isEdit && ratingValue != rating}
       ]"
       @click="setRating(rating)"
       @mouseover="starOver(rating)"
@@ -33,10 +33,8 @@ import {ref} from "vue";
 export default {
   name: 'URating',
   props: {
-    modelValue: [String, Number],
-    value: [String, Number, null],
+    ratingValue: [String, Number, null],
     name: String,
-    id: String,
     isEdit: Boolean,
     required: Boolean
   },
@@ -46,23 +44,22 @@ export default {
 
     const starOver = (index) => {
       if (props.isEdit) {
-        props.temp_value = props.value;
-        return props.value = index;
+        temp_value.value = props.ratingValue;
+        // return props.value = index;
       }
     }
 
     const starOut = () => {
       if (props.isEdit) {
-        return props.value = props.temp_value;
+        // return props.value = props.temp_value;
       }
     }
 
     const setRating = (val) => {
-      console.log('val', val);
       if (props.isEdit) {
-        // emit('update:modelValue', val)
-        props.temp_value = val;
-        return props.value = val;
+        emit('update', val)
+        temp_value.value = val;
+        // return props.value = val;
       }
     }
 

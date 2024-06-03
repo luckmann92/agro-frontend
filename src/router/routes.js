@@ -5,6 +5,7 @@ const Auth = () => import(/* webpackChunkName: "auth-page" */'../pages/Auth')
 const UserApplicationPage = () => import(/* webpackChunkName: "user-application-page" */'../pages/UserApplicationPage')
 const UserCompetitionPage = () => import(/* webpackChunkName: "user-сompetition-page" */'../pages/UserCompetitionPage')
 const UserCompetitionDetailPage = () => import(/* webpackChunkName: "user-сompetition-detail-page" */'../pages/UserCompetitionDetailPage')
+// const UserCompetitionDetailRaitingPage = () => import(/* webpackChunkName: "user-сompetition-detail-raiting-page" */'../pages/UserCompetitionDetailRaitingPage')
 const UserCompetitionNewPage = () => import(/* webpackChunkName: "user-сompetition-new-page" */'../pages/UserCompetitionNewPage')
 const UserEstatePage = () => import(/* webpackChunkName: "user-estate-page" */'../pages/UserEstatePage')
 const UserEstateNewPage = () => import(/* webpackChunkName: "user-estate-new-page" */'../pages/UserEstateNewPage')
@@ -77,6 +78,17 @@ const routes = [
             layout: 'DefaultLayout',
             requiresAuth: true,
             title: 'Конкурс | АГРО'
+        },
+        component: UserCompetitionDetailPage,
+    },
+    {
+        path: '/competition/rating/:id',
+        name: 'UserCompetitionDetailRaitingPage',
+        meta: {
+            layout: 'DefaultLayout',
+            requiresAuth: true,
+            title: 'Проставить оценки | АГРО',
+            edit: true
         },
         component: UserCompetitionDetailPage,
     },

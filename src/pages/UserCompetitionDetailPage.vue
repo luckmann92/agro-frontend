@@ -1,7 +1,8 @@
 <template>
   <div class="container">
-    <div class="fb fb--jc-sb">
+    <div class="content-top">
       <u-button @click="$router.back()">Вернуться</u-button>
+      <u-button @click="$router.back()" variant="dark">Завершить</u-button>
     </div>
     <div class="content">
       <UserCompetitionDetail :detail="CompetitionDetail" />
@@ -11,7 +12,8 @@
 
 <script>
 import UserCompetitionDetail from '@/components/Competition/UserCompetitionDetail'
-import {ref} from "vue";
+import {ref} from "vue"
+import { useRoute } from 'vue-router'
 
 export default {
   name: 'UserCompetitionDetailPage',
@@ -19,6 +21,8 @@ export default {
     UserCompetitionDetail
   },
   setup() {
+    const route = useRoute()
+    const isEdit = route.meta.edit
     const CompetitionDetail = ref({
       ID: 323,
       DATE_FROM: '24.08.24',
@@ -284,7 +288,8 @@ export default {
     })
 
     return {
-      CompetitionDetail
+      isEdit,
+      CompetitionDetail,
     }
   }
 }

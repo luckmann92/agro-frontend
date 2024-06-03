@@ -5,8 +5,9 @@
 			<div class="logo">
 				<img src="./../../assets/img/logo_large.png" alt="logo">
 			</div>
+
 			<template v-if="registerStep === 1">
-				<form class="form">
+				<div class="form">
 					<div class="form__title txt-mdl">Регистрация</div>
 					<div class="form__text txt">Введите номер телефона и&nbsp;ФИО, <br> чтобы зарегестрироваться в&nbsp;сервисе</div>
 
@@ -29,11 +30,11 @@
 						:disabled="fullName?.length < 1 || phone?.length < 12"
 						@click.prevent="getCode" 
 					>Зарегестрироваться</u-button>
-				</form>
+				</div>
 			</template>
 
 			<template v-else-if="registerStep === 2">
-				<form class="form">
+				<div class="form">
 					<div class="form__title txt-mdl">Введите SMS-код</div>
 					<div class="form__text txt txt-gray">{{ phone }}</div>
 
@@ -43,7 +44,11 @@
 						@pinValid="validCode"
 					/>
 
-					<u-button :variant="'dark'" @click.prevent="verificationCode">Отправить</u-button>
+					<u-button 
+						:variant="'dark'" 
+						:disabled="code.length < 4"
+						@click.prevent="verificationCode"
+					>Отправить</u-button>
 
 					<div v-if="currentTime > 0" class="form__text txt-sml txt-gray">
 						{{ timerText }}
@@ -51,11 +56,11 @@
 					<div v-else class="form__text txt-sml txt-gray" @click.prevent="auth">
 						{{ timerText }}
 					</div>
-				</form>
+				</div>
 			</template>
 
-			<template v-else>
-				<form class="form">
+			<template v-else-if="registerStep === 3">
+				<div class="register-form">
 					<div class="form__title txt-mdl">Регистрация кандидата</div>
 
 					<u-field-select
@@ -82,26 +87,28 @@
             <!-- @deleteImage="deleteImage($event)"
             @filesUpload="filesUpload($event)" -->
 
-					<u-button :variant="'dark'" @click.prevent="verificationCode">Отправить</u-button>
+					<u-button 
+						:variant="'dark'" 
+						@click.prevent="registration"
+					>Зарегестрироваться</u-button>
 
-					<div v-if="currentTime > 0" class="form__text txt-sml txt-gray" v-html="timerText" />
-					<div v-else class="form__text txt-sml txt-gray" @click.prevent="getCode">
-						{{ timerText }}
-					</div>
-				</form>
+				</div>
 			</template>
 
+			<div class="auth-btn">
+				<u-button v-if="registerStep === 1" @click="$emit('toLogin')">Войти</u-button>
+				<u-button v-else @click="() => {
+					registerStep = 1
+					$emit('toLogin')
+				}">Вернуться ко входу</u-button>
+			</div>
 		</div>
-		<div class="register-btn">
-			<u-button v-if="registerStep === 1" @click="$emit('toLogin')">Войти</u-button>
-			<u-button v-else @click="() => registerStep = 1">Вернуться ко входу</u-button>
-		</div>
-
 	</div>
 </template>
 
 <script>
 import { computed, watch, ref } from "vue"
+import { useRouter } from 'vue-router';
 import { useVuelidate } from '@vuelidate/core'
 import { required, minLength, email } from '@vuelidate/validators'
 import axios from "axios";
@@ -110,11 +117,13 @@ import { useProfile } from "@/store/profile"
 export default {
 	name: 'AuthRegister',
 	setup() {  
+		const router = useRouter()
     const showRegisterForm = ref(false)
     const profileStore = useProfile()
+		const { setUserType } = profileStore
     const fullName = ref(profileStore.profileInfo.fullName)
     const phone = ref(profileStore.profileInfo.phone)
-    const registerStep = ref(1)
+    const registerStep = ref(3)
     const code = ref('')
     const codeError = ref(false)
     const timer = ref(null)
@@ -225,20 +234,25 @@ export default {
 		}
 
 		const validCode = (val) => {
-			console.log('Valid PIN:', val);
 			code.value = val
-			// Do something with the valid pin code
 		};
 
 		const verificationCode = () => {
 			console.log('code', code.value);
-      if (code.value.length < 4) {
-        codeError.value = true
-        return
-      }
-			if (code.value === 1234) {
-				registerStep.value = 2
-			} 
+			registerStep.value = 3
+      // axios.post('/auth', {
+      //   phone: numPhone.value,
+      //   code: Number(code.value)
+      // })
+      //   .then(res => {
+			// 		console.log('auth:res', res);
+      //   })
+    }
+
+		const registration = () => {
+			setUserType('К')
+			router.push('/competition')
+
       // axios.post('/auth', {
       //   phone: numPhone.value,
       //   code: Number(code.value)
@@ -251,7 +265,7 @@ export default {
 		const timerText = computed(() => {
       let str = 'Запросить повторно код подтверждения '
       if (timer.value) {
-        str += `<br/> через ${currentTime.value} сек.`
+        str += ` через ${currentTime.value} сек.`
       }
       return str
     })
@@ -277,6 +291,8 @@ export default {
 			getCode,
 			validCode,
 			verificationCode,
+
+			registration,
 
 			region,
 			regionList,

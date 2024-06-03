@@ -3,10 +3,10 @@
 		<template #default>
 			<div class="top">
 				<div class="fb fb--ai-c fb--g20">
-					<input v-if="checkField" type="checkbox" :checked="checkedField" @change="changeField">
+					<input v-if="checkField" type="checkbox" :checked="checkedField" @change="changeField($event, itemData?.ID)">
 					<div class="txt-block">
-						<p class="txt-sml  txt-gray">Область: {{ 'Чуйская' }}</p>
-						<p class="txt-mdl">{{ 'Орашаемый' }}</p>
+						<p class="txt-sml  txt-gray">Область: {{ itemData?.REGION }}</p>
+						<p class="txt-mdl">{{ itemData?.TYPE }}</p>
 					</div>
 				</div>
 				<div class="btn-wrap">
@@ -52,6 +52,10 @@
 	export default {
 		name: 'UserEstateitem',
 		props: {
+			itemData: {
+				type: Object,
+				default: () => {}
+			},
 			checkField: {
 				type: Boolean,
 				default: false
@@ -63,8 +67,8 @@
 		},
 		setup(props, { emit }) {
 
-			const changeField = (e) => {
-				emit('selectEstate', e.target.checked)
+			const changeField = (e, id) => {
+				emit('selectEstate', id, e.target.checked)
 			}
 
 			return {

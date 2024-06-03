@@ -44,9 +44,12 @@ export const useProfile = defineStore(
       delete axios.defaults.headers['Auth-Token']
     }
 
-    // записать авторизированного пользователя
-    const setUser = (data, uType) => {
+    // записать тип пользователя
+    const setUserType = (uType) => {
       userType.value = uType
+    }
+    // записать авторизированного пользователя
+    const setUser = (data) => {
       profile.value = data
       profile.value.logged = true
       phone.value = profile.value?.fields?.find(field => field.TYPE_ID === 'PHONE')?.VALUE
@@ -93,6 +96,7 @@ export const useProfile = defineStore(
       profile,
       isLoggedIn,
       loadingProfile,
+      setUserType,
       returnUserToAuth,
       checkAuth,
       setUser,

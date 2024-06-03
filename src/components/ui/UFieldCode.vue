@@ -73,19 +73,53 @@
 </template>
 
 <script>
+import {ref, computed} from "vue";
 export default {
   name: 'UFieldCode',
   data: () => ({
     length: 4,
   }),
-  // props: {
-	// 	codeLength: {
-  //     type: Number,
-  //     required: false,
-  //     default: () => 4,
-  //   }
+  // pinValid: {
+  //   type: Function,
+  //   default: null
   // },
-  // setup(props, { emit }) {
+  emits: ['pinValid'],
+  setup(props, { emit }) {
+    const pinValue = ref(['', '', '', '']);
+
+    const handleInput = (index) => {
+      // Allow only numeric input
+      console.log("index", index, typeof index);
+      pinValue.value[index] = pinValue.value[index].replace(/[^0-9]/g, '');
+
+      // Automatically focus the next input if the current one is filled
+      if (pinValue.value[index].length === 1) {
+        focusNext(index);
+        console.log('pinValue.value', pinValue.value);
+        emit('pinValid', pinValue.value.join(''));
+      }
+    };
+
+    const focusNext = (index) => {
+      if (index < 3) {
+        document.querySelectorAll('.code-field__input')[index + 1].focus();
+      }
+    };
+
+    const focusPrevious = (index) => {
+      if (index > 0) {
+        document.querySelectorAll('.code-field__input')[index - 1].focus();
+      }
+    };
+
+    return {
+      pinValue,
+      handleInput,
+      focusNext,
+      focusPrevious
+    }
+
+
   //   let codeArr = ref([])
 
   //   const paste = (e) => {
@@ -139,57 +173,28 @@ export default {
   //     type,
   //     goto
   //   }
-	// }
+	}
 }
-</script>
-<script setup>
-import {ref, computed} from "vue";
-const pinValue = ref(['', '', '', '']);
 
-const handleInput = (index) => {
-  // Allow only numeric input
-  console.log("index", index, typeof index);
-  pinValue.value[index] = pinValue.value[index].replace(/[^0-9]/g, '');
-
-  // Automatically focus the next input if the current one is filled
-  if (pinValue.value[index].length === 1) {
-    focusNext(index);
-  }
-};
-
-const focusNext = (index) => {
-  if (index < 3) {
-    document.querySelectorAll('.code-field__input')[index + 1].focus();
-  }
-};
-
-const focusPrevious = (index) => {
-  if (index > 0) {
-    document.querySelectorAll('.code-field__input')[index - 1].focus();
-  }
-};
-
-const isPinValid = computed(() => pinValue.value.every(val => {
+// // const isPinValid = computed(() => pinValue.value.some(val => {
   
-  console.log('pinValue', pinValue.value);
-  console.log('every', val);
-  return val !== ''
-}));
+// //   console.log('pinValue', pinValue.value);
+// //   console.log('every', val);
+// //   return val === ''
+// // }));
 
-defineProps({
-  pinValid: {
-    type: Function,
-    default: null
-  }
-});
+// defineProps({
+  
+// });
 
-defineEmits(['pinValid']);
+// defineEmits(['pinValid']);
 
-if (isPinValid.value) {
-  console.log('pinValue.value', pinValue.value);
-  emit('pinValid', pinValue.value.join(''));
-}
+// // if (isPinValid.value === false) {
+// //   console.log('pinValue.value', pinValue.value);
+// //   emit('pinValid', pinValue.value.join(''));
+// // }
 </script>
+
 
 <style scoped lang="scss">
 

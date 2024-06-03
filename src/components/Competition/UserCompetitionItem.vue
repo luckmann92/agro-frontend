@@ -1,12 +1,25 @@
 <template>
-	<div class="competition-item">
+	<!-- <div class="competition-item"> -->
     <u-card>
-      <div class="top">
+      <div v-if="itemData?.STATUS === 'FINISHED'" class="top">
         <div class="txt-block">
           <p class="txt txt-gray">{{ candidatesTitle }}</p>
-          <p class="txt"><b>Победитель: </b>{{ itemData?.WINNER }}</p>
+          <p v-if="itemData?.WINNER" class="txt"><b>Победитель: </b>{{ itemData?.WINNER }}</p>
         </div>
-        <u-button :href="`/competition/${itemData?.ID}`">Подробнее</u-button>
+        <div class="btn-wrap">
+          <u-button v-if="itemData?.WINNER" :href="`/competition/${itemData?.ID}`">Подробнее</u-button>
+          <u-button v-else :href="`/competition/rating/${itemData?.ID}`">Проставить оценки</u-button>
+        </div>
+      </div>
+      <div v-else class="top">
+        <div class="txt-block">
+          <p class="txt txt-gray">{{ candidatesTitle }}</p>
+        </div>
+        <div class="btn-wrap">
+          <u-button :href="`/competition/${itemData?.ID}`">Подробнее</u-button>
+          <u-button >Редактировать</u-button>
+          <u-button >Удалить</u-button>
+        </div>
       </div>
       <div class="">
         <div class="three-col-block txt-gray">
@@ -27,12 +40,12 @@
       <div class="divider"></div>
       <div class="bottom">
         <div class="txt-block">
-          <p class="txt-sml txt-gray">Область: {{itemData?.PLACE}}</p>
-          <p class="txt-mdl">{{itemData?.NAME}}</p>
+          <p class="txt-sml txt-gray">Область: {{itemData?.LAND.REGION}}</p>
+          <p class="txt-mdl">{{itemData?.LAND.TYPE}}</p>
         </div>
       </div>
     </u-card>
-	</div>
+	<!-- </div> -->
 </template>
 
 <script>

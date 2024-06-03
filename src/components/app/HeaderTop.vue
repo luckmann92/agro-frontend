@@ -32,22 +32,51 @@
         <u-button href="/auth" class="header__button">{{$route.path === '/applications' ? 'Выйти' : 'Войти'}}</u-button>
       </div>
 		</div>
+    <div v-if="showUserType" class="user-tabs">
+      <div 
+        :class="['tab', {'active': userType === 'МСХ'}]" 
+        @click="changeUserType('МСХ')"
+      >МСХ</div>
+      <div 
+        :class="['tab', {'active': userType === 'К'}]" 
+        @click="changeUserType('К')"
+      >Кандидат</div>
+      <div 
+        :class="['tab', {'active': userType === 'РУАР'}]" 
+        @click="changeUserType('РУАР')"
+      >РУАР</div>
+    </div>
   </div>
 </template>
 
 <script>
 import { useProfile } from "@/store/profile"
-import { ref } from "vue"
+import { computed, ref } from "vue"
+import { useRoute } from 'vue-router'
 
 export default {
   name: 'HeaderTop',
   props: {},
   setup() {
+    const route = useRoute()
     const profileStore = useProfile()
     const userType = ref(profileStore.userType)
+    const { setUserType } = profileStore
+
+    const showUserType = computed(() => {
+      return route.path === '/' || route.path === '/competition'
+    })
+
+    const changeUserType = (t) => {
+      console.log('t', t);
+      setUserType(t)
+    }
 
     return {
-      userType
+      route,
+      userType,
+      showUserType,
+      changeUserType
     }
   }
 }
@@ -55,6 +84,7 @@ export default {
 
 <style scoped lang="scss">
 .header {
+  position: relative;
   background-color: #FBFAFC;
   border-bottom: 1px solid #D9D9D9;
 
@@ -132,5 +162,30 @@ export default {
     color: #546274;
   }
 }
+.user-tabs {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  display: flex;
+  align-items: center;
+	background-color: #F2F2F2;
+	border: 2px solid #F2F2F2;
+	border-radius: 8px;
 
+  .tab {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 18px;
+    text-decoration: none;
+    background-color: transparent;
+    border-radius: 8px;
+    padding: 6px 8px;
+    transition: background-color 300ms;
+    cursor: pointer;
+
+    &.active {
+      background-color: #E0E0E0;
+    }
+  }
+}
 </style>

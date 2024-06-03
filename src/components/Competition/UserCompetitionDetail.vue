@@ -32,7 +32,11 @@
         <template #list>
           <div v-for="item in detail?.WINNER?.ITEMS" :key="item?.ID" class="rating-row">
             <div class="rating-row__text" v-html="item?.TEXT" />
-            <u-rating :value="item?.RATING" :isEdit="false" />
+            <u-rating 
+              :ratingValue="item?.RATING" 
+              :isEdit="isEdit" 
+              @update="(val) => item.RATING = val"
+            />
           </div>
         </template>
 
@@ -53,7 +57,11 @@
         <template #list>
           <div v-for="item in candidat?.ITEMS" :key="item?.ID" class="rating-row">
             <div class="rating-row__text" v-html="item?.TEXT" />
-            <u-rating :value="item?.RATING" :isEdit="false" />
+            <u-rating 
+              :ratingValue="item?.RATING" 
+              :isEdit="isEdit" 
+              @update="(val) => item.RATING = val"
+            />
           </div>
         </template>
 
@@ -68,6 +76,7 @@
 
 <script>
 import { computed } from "vue"
+import { useRoute } from 'vue-router'
 import { declOfNum } from '@/utils'
 import UserEstateitem from '@/components/Estates/UserEstateItem.vue'
 
@@ -78,6 +87,8 @@ export default {
     detail: Object
   },
   setup(props) {
+    const route = useRoute()
+    const isEdit = route.meta.edit
     const candidatesTitle = computed(() => {
       let number = props.detail?.WINNER && props.detail?.OTHER?.length ? props.detail.OTHER.length + 1 : 0
       return number ? `${number} ${declOfNum(number, ['кандидат', 'кандидата', 'кандидатов'])}` : 'Нет кандидатов'
@@ -86,6 +97,7 @@ export default {
     console.log('detail', props.detail.ITEMS);
 
     return {
+      isEdit,
       candidatesTitle,
     }
   }

@@ -1,10 +1,14 @@
 <template>
   <div class="container">
     <div class="application-list">
-      <div class="title">Заявки {{ list?.length }}</div>
+      <div class="content-top">
+        <div class="title">Заявки {{ list?.length }}</div>
+      </div>
 
-      <div class="list">
-        <application-item v-for="item in list" :key="item.ID" :itemData="item"/>
+      <div class="content">
+        <div class="list">
+          <ApplicationItem v-for="item in list" :key="item.ID" :itemData="item"/>
+        </div>
       </div>
     </div>
   </div>

@@ -1,5 +1,5 @@
 <template>
-	<div class="competition-item">
+	<!-- <div class="competition-item"> -->
     <u-card>
       <div class="top txt-gray">
         <div class="txt-block">
@@ -28,7 +28,7 @@
         </div>
       </div>
     </u-card>
-	</div>
+	<!-- </div> -->
 </template>
 
 <script>

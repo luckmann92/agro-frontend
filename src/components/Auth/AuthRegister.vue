@@ -17,9 +17,9 @@
 						:label="'ФИО'"
 						:placeholder="'Джураев Абдулфато Латифович'"
 					/>
-					<u-field
-						:id="'auth-phone'"
-						v-model="phone"
+						<!-- :id="'auth-phone'"
+						v-model="phone" -->
+					<u-field-phone
 						:label="'Номер телефона'"
 						:placeholder="'+996 (990) 000 000'"
 					/>
@@ -108,10 +108,10 @@
 
 <script>
 import { computed, watch, ref } from "vue"
-import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router'
 import { useVuelidate } from '@vuelidate/core'
 import { required, minLength, email } from '@vuelidate/validators'
-import axios from "axios";
+import axios from "axios"
 import { useProfile } from "@/store/profile"
 
 export default {
@@ -123,7 +123,7 @@ export default {
 		const { setUserType } = profileStore
     const fullName = ref(profileStore.profileInfo.fullName)
     const phone = ref(profileStore.profileInfo.phone)
-    const registerStep = ref(3)
+    const registerStep = ref(1)
     const code = ref('')
     const codeError = ref(false)
     const timer = ref(null)

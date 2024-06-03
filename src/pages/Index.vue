@@ -1,8 +1,6 @@
 <template>
   <div class="container">
     <div class="competition-list">
-      <div class="title">Конкурсы</div>
-
       <competition-list :list="compList" />
     </div>
   </div>

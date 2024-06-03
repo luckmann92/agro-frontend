@@ -29,7 +29,7 @@
 
       <div class="header__right">
         <div v-if="$route.path != '/'" class="header__user">Кульбаев Марат Макашевич</div>
-        <u-button href="/auth" class="header__button">{{$route.path === '/applications' ? 'Выйти' : 'Войти'}}</u-button>
+        <u-button :href="$route.path != '/' ? '/' : '/auth'" class="header__button">{{$route.path === '/applications' ? 'Выйти' : 'Войти'}}</u-button>
       </div>
 		</div>
     <div v-if="showUserType" class="user-tabs">

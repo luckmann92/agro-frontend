@@ -1,5 +1,5 @@
 <template>
-  <div class="application-item">
+  <!-- <div class="application-item"> -->
     <u-card>
       <div class="top">
         <div class="txt-block">
@@ -32,7 +32,7 @@
         {{ showAll ? 'Закрыть' : 'Показать все документы' }}
       </button> -->
     </u-card>
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>

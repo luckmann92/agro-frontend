@@ -20,7 +20,7 @@ export default {
     AuthRegister
   },
   setup() {  
-    const showRegisterForm = ref(true)  
+    const showRegisterForm = ref(false)  
     // const profileStore = useProfile()
     // const phone = ref(profileStore.phone)
     // const fullName = ref(profileStore.fullName)

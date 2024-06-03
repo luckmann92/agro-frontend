@@ -1,6 +1,11 @@
 <template>
-  <div class="list">
-    <competition-item v-for="item in list" :key="item.ID" :itemData="item"/>
+  <div class="content-top">
+    <div class="title">Конкурсы</div>
+  </div>
+  <div class="content">
+    <div class="list">
+      <competition-item v-for="item in list" :key="item.ID" :itemData="item"/>
+    </div>
   </div>
 </template>
 

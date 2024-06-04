@@ -15,8 +15,8 @@
 						:id="'auth-phone'"
 						v-model="fullName"
 						:label="'ФИО'"
-						:placeholder="'Джураев Абдулфато Латифович'"
 					/>
+						<!-- :placeholder="'Джураев Абдулфато Латифович'" -->
 
 					<u-field-phone
 						:label="'Номер телефона'"
@@ -27,7 +27,7 @@
 						<!-- :disabled="!v$.fullName.$error && !v$.phone.$error" -->
 					<u-button 
 						:variant="'dark'" 
-						:disabled="fullName?.length < 1 || phone?.length < 12"
+						:disabled="fullName?.length < 1 || phone?.length < 18"
 						@click.prevent="getCode" 
 					>Зарегестрироваться</u-button>
 				</div>
@@ -81,9 +81,9 @@
 						v-model:value="file.file"
 						:label="file.label"
             :choiceFiles="[]"
-            :accept="accept"
             :max-files="1"
 					/>
+            <!-- :accept="accept" -->
             <!-- @deleteImage="deleteImage($event)"
             @filesUpload="filesUpload($event)" -->
 
@@ -260,7 +260,7 @@ export default {
     }
 
 		const registration = () => {
-			setUserType('К')
+			setUserType('K')
 			router.push('/competition')
 
       // axios.post('/auth', {

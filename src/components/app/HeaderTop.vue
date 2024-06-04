@@ -9,41 +9,41 @@
       </router-link>
 
       <div class="header__nav">
-        <template v-if="$route.path === '/'">
-          <router-link to="/ui">UI</router-link>
-          <router-link to="/applications">МинСельХоз</router-link>
-        </template>
-        <template v-else-if="userType === 'МСХ'">
+        <template v-if="userType === 'M'">
           <router-link to="/applications">Заявки кандидатов</router-link>
           <router-link to="/competition">Конкурсы</router-link>
         </template>
-        <template v-else-if="userType === 'К'">
-          <router-link to="/applications">Конкурсы</router-link>
+        <template v-else-if="userType === 'K'">
+          <router-link to="/competition">Конкурсы</router-link>
           <router-link to="/documents">Мои документы</router-link>
         </template>
-        <template v-else-if="userType === 'РУАР'">
+        <template v-else-if="userType === 'R'">
           <router-link to="/estate">Участки</router-link>
           <router-link to="/competition">Конкурсы</router-link>
+        </template>
+        <template v-else>
+          <router-link to="/ui">UI</router-link>
+          <router-link to="/applications">МинСельХоз</router-link>
         </template>
       </div>
 
       <div class="header__right">
         <div v-if="$route.path != '/'" class="header__user">Кульбаев Марат Макашевич</div>
-        <u-button :href="$route.path != '/' ? '/' : '/auth'" class="header__button">{{$route.path === '/applications' ? 'Выйти' : 'Войти'}}</u-button>
+        <u-button :href="$route.path != '/' ? '/' : '/auth'" class="header__button">{{$route.path === '/' ? 'Войти' : 'Выйти'}}</u-button>
       </div>
 		</div>
     <div v-if="showUserType" class="user-tabs">
       <div 
-        :class="['tab', {'active': userType === 'МСХ'}]" 
-        @click="changeUserType('МСХ')"
+        :class="['tab', {'active': userType === 'M'}]" 
+        @click="changeUserType('M')"
       >МСХ</div>
       <div 
-        :class="['tab', {'active': userType === 'К'}]" 
-        @click="changeUserType('К')"
+        :class="['tab', {'active': userType === 'K'}]" 
+        @click="changeUserType('K')"
       >Кандидат</div>
       <div 
-        :class="['tab', {'active': userType === 'РУАР'}]" 
-        @click="changeUserType('РУАР')"
+        :class="['tab', {'active': userType === 'R'}]" 
+        @click="changeUserType('R')"
       >РУАР</div>
     </div>
   </div>
@@ -52,24 +52,34 @@
 <script>
 import { useProfile } from "@/store/profile"
 import { computed, ref } from "vue"
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 
 export default {
   name: 'HeaderTop',
   props: {},
   setup() {
     const route = useRoute()
+    const router = useRouter()
     const profileStore = useProfile()
     const userType = ref(profileStore.userType)
     const { setUserType } = profileStore
 
     const showUserType = computed(() => {
-      return route.path === '/' || route.path === '/competition'
+      return (route.path === '/applications' || route.path === '/competition'  || route.path === '/estate')
     })
 
     const changeUserType = (t) => {
       console.log('t', t);
       setUserType(t)
+      if (t === 'M') {
+        router.push('/applications')
+      } else if (t === 'K') {
+        router.push('/competition')
+      } else if (t === 'R') {
+        router.push('/estate')
+      } else {
+        router.push('/')
+      }
     }
 
     return {

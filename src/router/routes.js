@@ -5,7 +5,7 @@ const Auth = () => import(/* webpackChunkName: "auth-page" */'../pages/Auth')
 const UserApplicationPage = () => import(/* webpackChunkName: "user-application-page" */'../pages/UserApplicationPage')
 const UserCompetitionPage = () => import(/* webpackChunkName: "user-сompetition-page" */'../pages/UserCompetitionPage')
 const UserCompetitionDetailPage = () => import(/* webpackChunkName: "user-сompetition-detail-page" */'../pages/UserCompetitionDetailPage')
-// const UserCompetitionDetailRaitingPage = () => import(/* webpackChunkName: "user-сompetition-detail-raiting-page" */'../pages/UserCompetitionDetailRaitingPage')
+const UserDocumentsPage = () => import(/* webpackChunkName: "user-documents-page" */'../pages/UserDocumentsPage')
 const UserCompetitionNewPage = () => import(/* webpackChunkName: "user-сompetition-new-page" */'../pages/UserCompetitionNewPage')
 const UserEstatePage = () => import(/* webpackChunkName: "user-estate-page" */'../pages/UserEstatePage')
 const UserEstateNewPage = () => import(/* webpackChunkName: "user-estate-new-page" */'../pages/UserEstateNewPage')
@@ -101,6 +101,16 @@ const routes = [
             title: 'Конкурс | АГРО'
         },
         component: UserCompetitionNewPage,
+    },
+    {
+        path: '/documents',
+        name: 'UserDocumentsPage',
+        meta: {
+            layout: 'DefaultLayout',
+            requiresAuth: true,
+            title: 'Мои документы | АГРО'
+        },
+        component: UserDocumentsPage,
     },
     {
         path: '/estate',

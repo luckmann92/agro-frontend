@@ -33,12 +33,12 @@
 			<u-field
 				:label="'Кадастровый номер'"
 				:id="'auth-phone'"
-				v-model="estateData.area"
+				v-model="estateData.cadastralNumber"
 			/>
 			<u-field
 				:label="'Целевое использование земель'"
 				:id="'auth-phone'"
-				v-model="estateData.area"
+				v-model="estateData.use"
 			/>
 
 			<template v-for="item in estateData.actualPlasementList" :key="item.year">
@@ -47,13 +47,18 @@
 					:labelYear="item.year"
 					:id="'auth-phone'"
 					v-model="item.value"
-					:placeholder="'1 000м2'"
 				>
-					<u-button>Добавить 2022</u-button>
+					<u-button @click="addYear" :disabled="true">Добавить 2022</u-button>
 				</u-field>
 			</template>
 
+			<!-- <u-button 
+				class="estate-new__btn" 
+				:variant="'dark'"
+				@click="add"
+			>Добавить</u-button> -->
 			<u-button 
+				:href="'/estate'"
 				class="estate-new__btn" 
 				:variant="'dark'"
 				@click="add"
@@ -91,9 +96,15 @@ components: {  },
 			emit('addEstate', estateData.value)
 		}
 
+		const addYear = () => {
+			let lastYear = currentYear - estateData.value.actualPlasementList.length
+			estateData.value.actualPlasementList.push({ year: lastYear, value: ''})
+		}
+
 		return {
 			estateData,
-			add
+			add,
+			addYear
 		}
 	}
 }

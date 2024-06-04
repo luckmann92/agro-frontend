@@ -53,7 +53,7 @@ export default {
     // const timer = ref(null)
 
 		const login = () => {
-			setUserType('МСХ')
+			setUserType('M')
 			router.push('/applications')
 		}
 

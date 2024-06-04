@@ -4,20 +4,20 @@
 		<div class="content-top">
 			<div class="title">Конкурсы</div>
 			<u-button 
-				v-if="userType === 'РУАР'" 
+				v-if="userType === 'R'" 
 				:href="'/competition/new'" 
 				:variant="'dark'" 
 				:icon="'add'"
 			>Добавить конкурс</u-button>
 
-			<div v-if="userType === 'РУАР'" class="content-tabs-wrap center">
+			<div v-if="userType === 'R'" class="content-tabs-wrap center">
 				<div class="content-tabs">
 					<div :class="['content-tab', {'active': listType === 0}]" @click="() => listType = 0">Объявленные</div>
 					<div :class="['content-tab', {'active': listType === 1}]" @click="() => listType = 1">Завершенные</div>
 				</div>
 			</div>
 
-			<div v-if="userType === 'К'" class="content-tabs-wrap">
+			<div v-if="userType === 'K'" class="content-tabs-wrap">
 				<div class="content-tabs">
 					<div :class="['content-tab', {'active': listTypeK === 0}]" @click="() => listTypeK = 0">Объявленные</div>
 					<div :class="['content-tab', {'active': listTypeK === 1}]" @click="() => listTypeK = 1">Учавствую</div>
@@ -39,7 +39,7 @@
 			<img src="./../../assets/img/competition.svg" alt="">
 		</div>
 		<div class="txt txt--gray">У вас нет участков</div>
-		<u-button v-if="userType === 'РУАР'" :href="'/competition/new'" :variant="'dark'" :icon="'add'">Добавить конкурс</u-button>
+		<u-button v-if="userType === 'R'" :href="'/competition/new'" :variant="'dark'" :icon="'add'">Добавить конкурс</u-button>
 	</div>
 
 </template>
@@ -66,10 +66,8 @@ export default {
 		const listType = ref(0)
 		const listTypeK = ref(0)
 
-		console.log('userType', userType.value);
-		console.log('props.list', props.list);
 		const currentList = computed(() => {
-			if (userType.value === 'РУАР') {
+			if (userType.value === 'R') {
 				return props.list.filter((el) => {
 					if (listType.value === 0) {
 						return el.STATUS === 'NEW'
@@ -77,9 +75,9 @@ export default {
 						return el.STATUS === 'FINISHED'
 					}
 				})
-			} else if (userType.value === 'К') {
+			} else if (userType.value === 'K') {
 				return props.list.filter((el) => {
-					console.log('listType', listTypeK.value);
+					// console.log('listType', listTypeK.value);
 					if (listTypeK.value === 0) {
 						return el.STATUS === 'NEW'
 					} else if (listTypeK.value === 2) {

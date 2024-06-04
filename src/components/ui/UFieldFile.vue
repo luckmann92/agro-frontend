@@ -7,13 +7,16 @@
       v-html="label"
     />
     <label
-      :class="'field-file__input'"
+      :class="['field-file__input', classFiles]"
       :for="uid"
       @drop.prevent="dropFiles($event.dataTransfer.files)"
       @dragover.prevent="filesDrag = true"
       @dragleave.prevent="filesDrag = false"
     >
-      <span class="files__upload">Прикрепить файл</span>
+      <span class="files__upload">
+        {{ choiceFile?.name ? choiceFile.name : 'Прикрепить файл' }}
+      </span>
+      <u-button v-if="choiceFile?.name">Изменить</u-button>
       <input 
         type="file" 
         :id="uid" 
@@ -37,8 +40,8 @@ export default {
       required: false,
       default: ''
     },
-		choiceFiles: {
-      type: Array,
+		choiceFile: {
+      type: Object,
       required: true
     },
     accept: {
@@ -77,12 +80,12 @@ export default {
       upload(e.target.files)
     }
 
-    // const classFiles = computed(() => ['files', {'files--not-empty': props.choiceFiles.length > 0 || props.uploadedFiles.length > 0}, {'files--draggable': filesDrag.value}])
+    const classFiles = computed(() => ['files', {'files--not-empty': props?.choiceFile?.name}, {'files--draggable': filesDrag.value}])
 
     const uid = computed(() => getCurrentInstance().uid)
 
-    const isImage = (extension) => extension === 'jpg' || extension === 'jpeg' || extension === 'png' || extension === 'svg'
-    const getExtension = (fileName) => fileName.split('.').pop().toLowerCase();
+    // const isImage = (extension) => extension === 'jpg' || extension === 'jpeg' || extension === 'png' || extension === 'svg'
+    // const getExtension = (fileName) => fileName.split('.').pop().toLowerCase();
 
     const deleteImage = (imgId) => {
       emit(
@@ -94,7 +97,7 @@ export default {
     }
 
     return {
-      // classFiles,
+      classFiles,
       filesDrag,
       dropFiles,
       uid,

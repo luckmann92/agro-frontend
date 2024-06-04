@@ -17,8 +17,8 @@
         </div>
         <div class="btn-wrap">
           <u-button :href="`/competition/${itemData?.ID}`">Подробнее</u-button>
-          <u-button >Редактировать</u-button>
-          <u-button >Удалить</u-button>
+          <u-button v-if="userType === 'R'">Редактировать</u-button>
+          <u-button v-if="userType === 'R'">Удалить</u-button>
         </div>
       </div>
       <div class="">
@@ -49,7 +49,8 @@
 </template>
 
 <script>
-import { computed } from "vue"
+import { computed, ref } from "vue"
+import { useProfile } from "@/store/profile"
 import { declOfNum } from '@/utils'
 
 export default {
@@ -70,11 +71,15 @@ export default {
 		}
 	},
   setup(props) {
+    const profileStore = useProfile()
+    const userType = ref(profileStore.userType)
+
     const candidatesTitle = computed(() => {
       return `${props.itemData.CANDIDATES_COUNTER} ${declOfNum(props.itemData.CANDIDATES_COUNTER, ['кандидат', 'кандидата', 'кандидатов'])}`
     })
 
     return {
+      userType,
       candidatesTitle,
     }
   }

@@ -10,9 +10,9 @@
 					</div>
 				</div>
 				<div class="btn-wrap">
-					<u-button >Показать на карте</u-button>
-					<!-- <u-button >Редактировать</u-button> -->
-					<!-- <u-button >Удалить</u-button> -->
+					<u-button :disabled="true">Показать на карте</u-button>
+					<u-button :disabled="true">Редактировать</u-button>
+					<u-button :disabled="true">Удалить</u-button>
 				</div>
 			</div>
 
@@ -49,33 +49,35 @@
 </template>
 
 <script>
-	export default {
-		name: 'UserEstateitem',
-		props: {
-			itemData: {
-				type: Object,
-				default: () => {}
-			},
-			checkField: {
-				type: Boolean,
-				default: false
-			},
-			checkedField: {
-				type: Boolean,
-				default: false
-			}
+export default {
+	name: 'UserEstateitem',
+	props: {
+		itemData: {
+			type: Object,
+			default: () => {}
 		},
-		setup(props, { emit }) {
+		checkField: {
+			type: Boolean,
+			default: false
+		},
+		checkedField: {
+			type: Boolean,
+			default: false
+		}
+	},
+	setup(props, { emit }) {
 
-			const changeField = (e, id) => {
-				emit('selectEstate', id, e.target.checked)
-			}
+		console.log('props', props);
 
-			return {
-				changeField
-			}
+		const changeField = (e, id) => {
+			emit('selectEstate', id, e.target.checked)
+		}
+
+		return {
+			changeField
 		}
 	}
+}
 </script>
 
 <style lang="scss" scoped>

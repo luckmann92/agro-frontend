@@ -8,6 +8,7 @@
 			<UserEstateitem 
 				v-for="item in list" 
 				:key="item.ID" 
+				:itemData="item"
 			/>
 		</div>
 	</div>

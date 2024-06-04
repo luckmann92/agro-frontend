@@ -14,7 +14,12 @@ export const useProfile = defineStore(
     const isLoggedIn = ref(false);
     const loadingProfile = ref(true);
     const phone = ref('')
-    const userType = ref('РУАР');
+    const userType = ref('M');
+    const userTypeList = ref([
+      {id: 1, code: 'M', label: 'МинСельХоз'}, 
+      {id: 2, code: 'K', label: 'Кандидат'}, 
+      {id: 3, code: 'R', label: 'РУАР'}
+    ]);
 
     // Проверка авторизации
     const checkAuth = () => {
@@ -47,15 +52,6 @@ export const useProfile = defineStore(
     // записать тип пользователя
     const setUserType = (uType) => {
       userType.value = uType
-      if (uType === 'МСХ') {
-        router.push('/application')
-      } else if (uType === 'К') {
-        router.push('/competition')
-      } else if (uType === 'РУАР') {
-        router.push('/estate')
-      } else {
-        router.push('/')
-      }
     }
     // записать авторизированного пользователя
     const setUser = (data) => {

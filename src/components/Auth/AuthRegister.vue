@@ -131,13 +131,19 @@ export default {
 
 		const region = ref(23)
 		const regionList = ref([
-			{ key: 23, value: 'Чуйская' },
-			{ key: 24, value: 'Не Чуйская' }
+			{ key: 18, value: 'Баткенская' },
+			{ key: 19, value: 'Джалал-Абадская' },
+			{ key: 20, value: 'Иссык-Кульская' },
+			{ key: 21, value: 'Ошская' },
+			{ key: 22, value: 'Таласская' },
+			{ key: 23, value: 'Чуйская' }
 		])
 		const status = ref(43)
 		const statusList = ref([
-			{ key: 43, value: 'Семхоз' },
-			{ key: 44, value: 'Не семхоз' }
+			{ key: 43, value: 'Соменноводческое хозяйство' },
+			{ key: 44, value: 'Племенное хозяйство' },
+			{ key: 45, value: 'Сельскохозяйственный кооператив' },
+			{ key: 46, value: 'Экономически приоритетный субъект сельского хозяйства' }
 		])
 		
     const accept = 'image/jpeg, image/jpg, image/png, application/pdf';

@@ -33,8 +33,10 @@ export default {
 		// 	{ key: 24, value: 'Не Чуйская' }
 		// ])
 		const statusList = ref([
-			{ key: 12, value: 'Семхоз' },
-			{ key: 13, value: 'Не Семхоз' }
+			{ key: 43, value: 'Соменноводческое хозяйство' },
+			{ key: 44, value: 'Племенное хозяйство' },
+			{ key: 45, value: 'Сельскохозяйственный кооператив' },
+			{ key: 46, value: 'Экономически приоритетный субъект сельского хозяйства' }
 		])
 
 		const addEstate = (estateData) => {

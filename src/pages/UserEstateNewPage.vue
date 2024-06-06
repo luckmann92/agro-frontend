@@ -31,12 +31,18 @@ export default {
 		})
 
 		const regionList = ref([
-			{ key: 23, value: 'Чуйская' },
-			{ key: 24, value: 'Не Чуйская' }
+			{ key: 18, value: 'Баткенская' },
+			{ key: 19, value: 'Джалал-Абадская' },
+			{ key: 20, value: 'Иссык-Кульская' },
+			{ key: 21, value: 'Ошская' },
+			{ key: 22, value: 'Таласская' },
+			{ key: 23, value: 'Чуйская' }
 		])
 		const estateTypeList = ref([
-			{ key: 45, value: 'Орашаемое' },
-			{ key: 46, value: 'Богарное' }
+			{ key: 43, value: 'Соменноводческое хозяйство' },
+			{ key: 44, value: 'Племенное хозяйство' },
+			{ key: 45, value: 'Сельскохозяйственный кооператив' },
+			{ key: 46, value: 'Экономически приоритетный субъект сельского хозяйства' }
 		])
 
 		const addEstate = (estateData) => {

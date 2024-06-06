@@ -17,7 +17,7 @@
 			/>
 
 			<u-field
-				:label="'Границы выставляемого участка'"
+				:label="'Площадь выставляемого участка'"
 				:id="'auth-phone'"
 				v-model="estateData.area"
 			/>
@@ -48,7 +48,7 @@
 					:id="'auth-phone'"
 					v-model="item.value"
 				>
-					<u-button @click="addYear" :disabled="true">Добавить 2022</u-button>
+					<u-button @click="addYear" :disabled="true">Добавить 2023</u-button>
 				</u-field>
 			</template>
 

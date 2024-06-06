@@ -10,20 +10,21 @@
 
       <div class="header__nav">
         <template v-if="userType === 'M'">
+          <router-link to="/candidates">Кандидаты</router-link>
           <router-link to="/applications">Заявки кандидатов</router-link>
           <router-link to="/competition">Конкурсы</router-link>
         </template>
         <template v-else-if="userType === 'K'">
-          <router-link to="/competition">Конкурсы</router-link>
+          <router-link to="/k_competition">Конкурсы</router-link>
           <router-link to="/documents">Мои документы</router-link>
         </template>
         <template v-else-if="userType === 'R'">
           <router-link to="/estate">Участки</router-link>
-          <router-link to="/competition">Конкурсы</router-link>
+          <router-link to="/r_competition">Конкурсы</router-link>
         </template>
         <template v-else>
-          <router-link to="/ui">UI</router-link>
-          <router-link to="/applications">МинСельХоз</router-link>
+          <!-- <router-link to="/ui">UI</router-link>
+          <router-link to="/applications">МинСельХоз</router-link> -->
         </template>
       </div>
 
@@ -51,7 +52,7 @@
 
 <script>
 import { useProfile } from "@/store/profile"
-import { computed, ref } from "vue"
+import { computed, ref, onBeforeMount } from "vue"
 import { useRoute, useRouter } from 'vue-router'
 
 export default {
@@ -64,21 +65,40 @@ export default {
     const userType = ref(profileStore.userType)
     const { setUserType } = profileStore
 
+    onBeforeMount(() => {
+      if (route.path == '/applications' || route.path == '/competition') {
+        setUserType('M')
+      } else if (route.path == '/k_competition' || route.path == '/documents') {
+        setUserType('K')
+      } else if (route.path == '/estate' || route.path == '/r_competition') {
+        setUserType('R')
+      }
+
+      console.log('route.path', route.path);
+      console.log('userType', userType.value);
+    })
+
     const showUserType = computed(() => {
-      return (route.path === '/applications' || route.path === '/competition'  || route.path === '/estate')
+      return (route.path === '/applications' 
+        || route.path === '/k_competition' 
+        || route.path === '/estate')
     })
 
     const changeUserType = (t) => {
       console.log('t', t);
       setUserType(t)
-      if (t === 'M') {
-        router.push('/applications')
-      } else if (t === 'K') {
-        router.push('/competition')
-      } else if (t === 'R') {
-        router.push('/estate')
-      } else {
-        router.push('/')
+      switch (t) {
+        case 'M':
+          router.push({ path: '/applications' })
+          break
+        case 'K':
+          router.push({ path: '/k_competition' })
+          break
+        case 'R':
+          router.push({ path: '/estate' })
+          break
+        default:
+          router.push({ path: '/' })
       }
     }
 
@@ -192,6 +212,7 @@ export default {
     padding: 6px 8px;
     transition: background-color 300ms;
     cursor: pointer;
+    pointer-events: none;
 
     &.active {
       background-color: #E0E0E0;

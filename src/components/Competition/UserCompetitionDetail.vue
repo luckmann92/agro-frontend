@@ -18,58 +18,77 @@
         </div>
       </div>
 
-      <UserEstateitem />
+      <UserEstateitem :itemData="detail?.LAND" />
     </div>
 
-    <div class="competition-detail__winner">
-      <div class="block-title">Победитель</div>
-      <u-card>
-        <div class="fb fb--jc-sb fb--ai-c">
-          <div class="txt-mdl">{{ detail?.WINNER?.USER_FULL_NAME }}</div>
-          <div class="txt txt-gray">{{ detail?.WINNER?.USER_POSITION }}</div>
-        </div>
+    <div v-if="applay" class="list applay-docs">
+      <u-field-file
+				v-for="file in docList"
+				:key="file.id"
+				v-model:value="file.file"
+				:label="file.label"
+				:choiceFile="file.file"
+				:max-files="1"
+				@filesUpload="filesUpload($event, file.id)"
+			/>
 
-        <template #list>
-          <div v-for="item in detail?.WINNER?.ITEMS" :key="item?.ID" class="rating-row">
-            <div class="rating-row__text" v-html="item?.TEXT" />
-            <u-rating 
-              :ratingValue="item?.RATING" 
-              :isEdit="isEdit" 
-              @update="(val) => item.RATING = val"
-            />
+			<u-button 
+				href="/k_competition"
+				:variant="'dark'" 
+			>Подать заявку</u-button>
+    </div>
+
+    <template v-else-if="detail?.WINNER?.USER_FULL_NAME">
+      <div class="competition-detail__winner">
+        <div class="block-title">Победитель</div>
+        <u-card>
+          <div class="fb fb--jc-sb fb--ai-c">
+            <div class="txt-mdl">{{ detail?.WINNER?.USER_FULL_NAME }}</div>
+            <div class="txt txt-gray">{{ detail?.WINNER?.USER_POSITION }}</div>
           </div>
-        </template>
 
-        <template #docs>
-          <u-doc-list :docs="detail?.WINNER?.DOCS" :showNum="0" />
-        </template>
-      </u-card>
-    </div>
+          <template #list>
+            <div v-for="item in detail?.WINNER?.ITEMS" :key="item?.ID" class="rating-row">
+              <div class="rating-row__text" v-html="item?.TEXT" />
+              <u-rating 
+                :ratingValue="item?.RATING" 
+                :isEdit="isEdit" 
+                @update="(val) => item.RATING = val"
+              />
+            </div>
+          </template>
 
-    <div class="competition-detail__others">
-      <div class="block-title">Остальные кандидаты: {{ detail?.OTHER?.length }}</div>
-      <u-card v-for="candidat in detail?.OTHER" :key="candidat?.ID">
-        <div class="fb fb--jc-sb fb--ai-c">
-          <div class="txt-mdl">{{ candidat?.USER_FULL_NAME }}</div>
-          <div class="txt txt-gray">{{ candidat?.USER_POSITION }}</div>
-        </div>
+          <template #docs>
+            <u-doc-list :docs="detail?.WINNER?.DOCS" :showNum="0" />
+          </template>
+        </u-card>
+      </div>
 
-        <template #list>
-          <div v-for="item in candidat?.ITEMS" :key="item?.ID" class="rating-row">
-            <div class="rating-row__text" v-html="item?.TEXT" />
-            <u-rating 
-              :ratingValue="item?.RATING" 
-              :isEdit="isEdit" 
-              @update="(val) => item.RATING = val"
-            />
+      <div class="competition-detail__others">
+        <div class="block-title">Остальные кандидаты: {{ detail?.OTHER?.length }}</div>
+        <u-card v-for="candidat in detail?.OTHER" :key="candidat?.ID">
+          <div class="fb fb--jc-sb fb--ai-c">
+            <div class="txt-mdl">{{ candidat?.USER_FULL_NAME }}</div>
+            <div class="txt txt-gray">{{ candidat?.USER_POSITION }}</div>
           </div>
-        </template>
 
-        <template #docs>
-          <u-doc-list :docs="candidat?.DOCS" :showNum="0" />
-        </template>
-      </u-card>
-    </div>
+          <template #list>
+            <div v-for="item in candidat?.ITEMS" :key="item?.ID" class="rating-row">
+              <div class="rating-row__text" v-html="item?.TEXT" />
+              <u-rating 
+                :ratingValue="item?.RATING" 
+                :isEdit="isEdit" 
+                @update="(val) => item.RATING = val"
+              />
+            </div>
+          </template>
+
+          <template #docs>
+            <u-doc-list :docs="candidat?.DOCS" :showNum="0" />
+          </template>
+        </u-card>
+      </div>
+    </template>
 
   </div>
 </template>
@@ -84,7 +103,9 @@ export default {
   name: "UserCompetitionDetail",
   components: { UserEstateitem },
   props: {
-    detail: Object
+    detail: Object,
+    applay: Boolean,
+    docList: Array
   },
   setup(props) {
     const route = useRoute()
@@ -94,11 +115,18 @@ export default {
       return number ? `${number} ${declOfNum(number, ['кандидат', 'кандидата', 'кандидатов'])}` : 'Нет кандидатов'
     })
 
-    console.log('detail', props.detail.ITEMS);
+    // console.log('detail', props.detail.ITEMS);
+
+    const filesUpload = (e, id) => {
+			files.value.forEach((f) => {
+				if (f.id === id) f.name === e.files[0].name
+			})
+		}
 
     return {
       isEdit,
       candidatesTitle,
+      filesUpload
     }
   }
 }
@@ -116,5 +144,8 @@ export default {
   //    width: 30%;
   //  }
   //}
+// }
+// .applay-docs {
+
 // }
 </style>

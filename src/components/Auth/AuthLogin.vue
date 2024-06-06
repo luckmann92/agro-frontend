@@ -53,8 +53,14 @@ export default {
     // const timer = ref(null)
 
 		const login = () => {
-			setUserType('M')
-			router.push('/applications')
+			console.log('phone', phone.value);
+			if (phone.value === '+996 (990) 234 234') {
+				setUserType('M')
+				router.push('/applications')
+			} else if (phone.value === '+996 (990) 456 456') {
+				setUserType('R')
+				router.push('/estate')
+			}
 		}
 
 		const updatePhone = (val) => {

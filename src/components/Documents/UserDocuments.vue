@@ -48,42 +48,42 @@ export default {
 			{ 
 				id: 1, 
 				label: 'Информацию при наличии используемых земельных участков (кадастровая информация, вид угодий правоустанавливающие и&nbsp;право удостоверяющие документы);',
-				file: { name: 'Document.doc', src: '' }
+				file: { name: 'Document.pdf', src: '/docs/Document.pdf' }
 			},
 			{ 
 				id: 2, 
 				label: 'Справка с уполномоченных государственных органов статистики, налоговой службы и&nbsp;социального фонда об отсутствии задолженностей и&nbsp;информацию о&nbsp;не&nbsp;прерывной деятельности за&nbsp;последние три&nbsp;года;',
-				file: { name: 'Document.doc', src: '' }
+				file: { name: 'Document.pdf', src: '/docs/Document.pdf' }
 			},
 			{ 
 				id: 3, 
 				label: 'Информацию о материально-технической базе для&nbsp;производства и&nbsp;реализации сельскохозяйственной продукции;',
-				file: { name: 'Document.doc', src: '' }
+				file: { name: 'Document.pdf', src: '/docs/Document.pdf' }
 			},
 			{ 
 				id: 4, 
 				label: 'Наличие соответствующего статуса семенного или&nbsp;племенного хозяйства, за&nbsp;исключением сельскохозяйственных кооперативов;',
-				file: { name: 'Document.doc', src: '' }
+				file: { name: 'Document.pdf', src: '/docs/Document.pdf' }
 			},
 			{ 
 				id: 5, 
 				label: 'Информацию реализации одного из&nbsp;продуктов продовольственной безопасности;',
-				file: { name: 'Document.doc', src: '' }
+				file: { name: 'Document.pdf', src: '/docs/Document.pdf' }
 			},
 			{ 
 				id: 6, 
 				label: 'Информацию о необходимом кадровом обеспечении',
-				file: { name: 'Document.doc', src: '' }
+				file: { name: 'Document.pdf', src: '/docs/Document.pdf' }
 			},
 			{ 
 				id: 7, 
 				label: 'Для племенных хозяйств дополнительно: <br> - информацию о&nbsp;племенном учете; <br> - ветеринарную справку о&nbsp;благополучии хозяйства по&nbsp;инфекционным и&nbsp;острозаразным заболеваниям.',
-				file: { name: 'Document.doc', src: '' }
+				file: { name: 'Document.pdf', src: '/docs/Document.pdf' }
 			},
 			{ 
 				id: 8, 
 				label: 'Для семеноводческих хозяйств дополнительно: <br> - информацию о&nbsp;фактической структуре посевных площадей с&nbsp;расчетом объема производства и&nbsp;реализации семян по&nbsp;каждой сельскохозяйственной культуре на&nbsp;ближайшие три&nbsp;года, предполагаемых источник',
-				file: { name: 'Document.doc', src: '' }
+				file: { name: 'Document.pdf', src: '/docs/Document.pdf' }
 			}
 		])
 

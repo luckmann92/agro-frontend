@@ -23,7 +23,7 @@
           <p class="txt-mdl">{{itemData?.NAME}}</p>
         </div>
         <div class="btn-wrap">
-          <u-button>Показать на карте</u-button>
+          <a class="btn" href="https://www.google.com/maps" target="_blank">Показать на карте</a>
           <u-button href="/23">Подробнее</u-button>
         </div>
       </div>

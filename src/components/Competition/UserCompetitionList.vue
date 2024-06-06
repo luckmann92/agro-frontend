@@ -10,14 +10,14 @@
 				:icon="'add'"
 			>Добавить конкурс</u-button>
 
-			<div v-if="userType === 'R'" class="content-tabs-wrap center">
+			<div v-if="userType === 'R'" class="content-tabs-wrap">
 				<div class="content-tabs">
 					<div :class="['content-tab', {'active': listType === 0}]" @click="() => listType = 0">Объявленные</div>
 					<div :class="['content-tab', {'active': listType === 1}]" @click="() => listType = 1">Завершенные</div>
 				</div>
 			</div>
 
-			<div v-if="userType === 'K'" class="content-tabs-wrap">
+			<div v-if="userType === 'K'" class="content-tabs-wrap right">
 				<div class="content-tabs">
 					<div :class="['content-tab', {'active': listTypeK === 0}]" @click="() => listTypeK = 0">Объявленные</div>
 					<div :class="['content-tab', {'active': listTypeK === 1}]" @click="() => listTypeK = 1">Учавствую</div>
@@ -29,7 +29,8 @@
 			<UserCompetitionItem 
         v-for="item in currentList" 
         :key="item.ID" 
-        :itemData="item" 
+        :itemData="item"
+				:docList="userType === 'K' ? docList : []"
       />
 		</div>
 	</div>
@@ -65,6 +66,23 @@ export default {
     const userType = ref(profileStore.userType)
 		const listType = ref(0)
 		const listTypeK = ref(0)
+		const docList = ref([
+			{ 
+				id: 11, 
+				label: 'Инвестиционный проект по реализации сельскохозяйственной деятельности с графиком вложений и направленности на 3 и более продуктов продовольственной безопасности;',
+				file: { name: 'Document.pdf', src: '/docs/Document.pdf' }
+			},
+			{ 
+				id: 12, 
+				label: 'План севооборота на предоставляемые земли;',
+				file: { name: 'Document.pdf', src: '/docs/Document.pdf' }
+			},
+			{ 
+				id: 13, 
+				label: 'Информацию об использовании на предоставляемых землях новых технологий реализации сельскохозяйственной деятельности (капельное орошение, механизация ведения сельскохозяйственной деятельности и т.д.);',
+				file: { name: 'Document.pdf', src: '/docs/Document.pdf' }
+			}
+		])
 
 		const currentList = computed(() => {
 			if (userType.value === 'R') {
@@ -83,7 +101,7 @@ export default {
 					} else if (listTypeK.value === 2) {
 						return el.STATUS === 'FINISHED'
 					} else {
-						return el.STATUS !== 'NEW' && el.STATUS !== 'FINISHED'
+						return el.STATUS === 'PARTICIPATE'
 					}
 				})
 			} else {
@@ -95,7 +113,8 @@ export default {
       userType,
 			listType,
 			listTypeK,
-			currentList
+			currentList,
+			docList
     }
   }
 }

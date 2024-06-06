@@ -124,7 +124,7 @@ export const useCompetition = defineStore(
 				STATUS: "NEW",
 				...data
 			})
-			router.push(`/competition`)
+			router.push(`/k_competition`)
     }
 
     // удалить конкурс

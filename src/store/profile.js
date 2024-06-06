@@ -14,7 +14,7 @@ export const useProfile = defineStore(
     const isLoggedIn = ref(false);
     const loadingProfile = ref(true);
     const phone = ref('')
-    const userType = ref('M');
+    const userType = ref('');
     const userTypeList = ref([
       {id: 1, code: 'M', label: 'МинСельХоз'}, 
       {id: 2, code: 'K', label: 'Кандидат'}, 

@@ -5,8 +5,9 @@ const Auth = () => import(/* webpackChunkName: "auth-page" */'../pages/Auth')
 const UserApplicationPage = () => import(/* webpackChunkName: "user-application-page" */'../pages/UserApplicationPage')
 const UserCompetitionPage = () => import(/* webpackChunkName: "user-сompetition-page" */'../pages/UserCompetitionPage')
 const UserCompetitionDetailPage = () => import(/* webpackChunkName: "user-сompetition-detail-page" */'../pages/UserCompetitionDetailPage')
-const UserDocumentsPage = () => import(/* webpackChunkName: "user-documents-page" */'../pages/UserDocumentsPage')
 const UserCompetitionNewPage = () => import(/* webpackChunkName: "user-сompetition-new-page" */'../pages/UserCompetitionNewPage')
+const UserCompetitionApplayPage = () => import(/* webpackChunkName: "user-сompetition-applay-page" */'../pages/UserCompetitionApplayPage')
+const UserDocumentsPage = () => import(/* webpackChunkName: "user-documents-page" */'../pages/UserDocumentsPage')
 const UserEstatePage = () => import(/* webpackChunkName: "user-estate-page" */'../pages/UserEstatePage')
 const UserEstateNewPage = () => import(/* webpackChunkName: "user-estate-new-page" */'../pages/UserEstateNewPage')
 
@@ -72,6 +73,26 @@ const routes = [
         component: UserCompetitionPage,
     },
     {
+        path: '/k_competition',
+        name: 'UserKCompetitionPage',
+        meta: {
+            layout: 'DefaultLayout',
+            requiresAuth: true,
+            title: 'Конкурсы | АГРО'
+        },
+        component: UserCompetitionPage,
+    },
+    {
+        path: '/r_competition',
+        name: 'UserRCompetitionPage',
+        meta: {
+            layout: 'DefaultLayout',
+            requiresAuth: true,
+            title: 'Конкурсы | АГРО'
+        },
+        component: UserCompetitionPage,
+    },
+    {
         path: '/competition/:id',
         name: 'UserCompetitionDetailPage',
         meta: {
@@ -91,6 +112,17 @@ const routes = [
             edit: true
         },
         component: UserCompetitionDetailPage,
+    },
+    {
+        path: '/competition/applay-for/:id',
+        name: 'UserCompetitionApplayPage',
+        meta: {
+            layout: 'DefaultLayout',
+            requiresAuth: true,
+            title: 'Подать заявку | АГРО',
+            edit: true
+        },
+        component: UserCompetitionApplayPage,
     },
     {
         path: '/competition/new',

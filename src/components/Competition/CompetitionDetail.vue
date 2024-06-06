@@ -24,13 +24,13 @@
             <p class="txt-mdl">{{ 'Орашаемый' }}</p>
           </div>
           <div class="btn-wrap">
-            <u-button >Показать на карте</u-button>
+            <a class="btn" href="https://www.google.com/maps" target="_blank">Показать на карте</a>
           </div>
         </div>
 
         <div class="bottom">
           <div class="txt-block">
-            <p class="txt-sml">Границы выставляемого участка</p>
+            <p class="txt-sml">Площадь выставляемого участка</p>
             <p>{{ '1 000' }}м&sup2;</p>
           </div>
           <div class="txt-block">

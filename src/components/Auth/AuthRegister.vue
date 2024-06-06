@@ -261,7 +261,7 @@ export default {
 
 		const registration = () => {
 			setUserType('K')
-			router.push('/competition')
+			router.push('/k_competition')
 
       // axios.post('/auth', {
       //   phone: numPhone.value,

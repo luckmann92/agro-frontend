@@ -9,7 +9,7 @@
 						<p class="txt-mdl">{{ itemData?.TYPE }}</p>
 					</div>
 				</div>
-				<div class="btn-wrap">
+				<div v-if="userType === 'R'" class="btn-wrap">
 					<a class="btn" href="https://www.google.com/maps" target="_blank">Показать на карте</a>
 					<u-button :disabled="true">Редактировать</u-button>
 					<u-button :disabled="true">Удалить</u-button>
@@ -34,14 +34,14 @@
 
 		<template #detail>
 			<div class="txt-block">
-				<p class="txt-sml">Фактическое размещение культур</p>
+				<p class="txt-sml txt-gray">Фактическое размещение культур</p>
 				<p>{{ '2023   Свекла' }}</p>
 				<p>{{ '2022   Свекла' }}</p>
 				<p>{{ '2021   Люцерна' }}</p>
 				<p>{{ '2020   Люцерна' }}</p>
 			</div>
 			<div class="txt-block">
-				<p class="txt-sml">Целевое использование земель</p>
+				<p class="txt-sml txt-gray">Целевое использование земель</p>
 				<p>{{ 'Для засева культуры свеклы' }}</p>
 			</div>
 		</template>
@@ -49,6 +49,8 @@
 </template>
 
 <script>
+import { computed, ref } from "vue"
+import { useProfile } from "@/store/profile"
 export default {
 	name: 'UserEstateitem',
 	props: {
@@ -66,6 +68,8 @@ export default {
 		}
 	},
 	setup(props, { emit }) {
+    const profileStore = useProfile()
+    const userType = ref(profileStore.userType)
 
 		console.log('props', props);
 
@@ -74,7 +78,8 @@ export default {
 		}
 
 		return {
-			changeField
+			changeField,
+			userType
 		}
 	}
 }

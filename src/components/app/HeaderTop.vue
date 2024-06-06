@@ -30,7 +30,8 @@
 
       <div class="header__right">
         <div v-if="$route.path != '/'" class="header__user">Кульбаев Марат Макашевич</div>
-        <u-button :href="$route.path != '/' ? '/' : '/auth'" class="header__button">{{$route.path === '/' ? 'Войти' : 'Выйти'}}</u-button>
+        <u-button v-if="userType" @click="logout" class="header__button">Выйти</u-button>
+        <u-button v-else href="/auth" class="header__button">Войти</u-button>
       </div>
 		</div>
     <div v-if="showUserType" class="user-tabs">
@@ -73,15 +74,13 @@ export default {
       } else if (route.path == '/estate' || route.path == '/r_competition') {
         setUserType('R')
       }
-
-      console.log('route.path', route.path);
-      console.log('userType', userType.value);
     })
 
     const showUserType = computed(() => {
-      return (route.path === '/applications' 
-        || route.path === '/k_competition' 
-        || route.path === '/estate')
+      return userType.value
+      // return (route.path === '/applications' 
+      //   || route.path === '/k_competition' 
+      //   || route.path === '/estate')
     })
 
     const changeUserType = (t) => {
@@ -102,11 +101,17 @@ export default {
       }
     }
 
+    const logout = () => {
+      router.push({ path: '/' })
+      setUserType('')
+    }
+
     return {
       route,
       userType,
       showUserType,
-      changeUserType
+      changeUserType,
+      logout
     }
   }
 }

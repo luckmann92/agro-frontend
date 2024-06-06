@@ -47,7 +47,7 @@ export default {
 		const router = useRouter()
     const showRegisterForm = ref(false)  
     const profileStore = useProfile()
-		const { setUserType } = profileStore
+		const { setUserType, setUser } = profileStore
     const phone = ref(profileStore.phone)
     // const code = ref('')
     // const timer = ref(null)
@@ -60,12 +60,18 @@ export default {
 			} else if (phone.value === '+996 (990) 456 456') {
 				setUserType('R')
 				router.push('/estate')
+			} else if (phone.value === '+996 (990) 678 678') {
+				setUserType('K')
+				router.push('/k_competition')
 			}
+			setUser({
+				phone: phone.value
+			})
 		}
 
 		const updatePhone = (val) => {
-			console.log('updatePhone:val', val);
-			console.log('updatePhone:length', val.length);
+			// console.log('updatePhone:val', val);
+			// console.log('updatePhone:length', val.length);
 			phone.value = val
 		}
 

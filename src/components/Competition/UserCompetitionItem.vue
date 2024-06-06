@@ -41,7 +41,7 @@
           </div>
         </div>
         <div v-if="userType === 'K' && itemData?.STATUS === 'NEW'" class="btn-wrap">
-          <u-button :href="`/application-new`" :disabled="true">Подать заявку</u-button>
+          <u-button :href="`/k_competition/applay-for/${itemData.ID}`">Подать заявку</u-button>
         </div>
       </div>
 

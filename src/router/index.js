@@ -17,8 +17,8 @@ router.afterEach((to, from) => {
 
 router.beforeEach(async (to) => {
     const profileStore = useProfile()
-    // if (to.meta.requiresAuth && !profileStore.isLoggedIn) return { name: 'Auth' }
-    // if (!to.meta.requiresAuth && profileStore.isLoggedIn) return { name: 'Index' }
+    if (to.meta.requiresAuth && !profileStore.isLoggedIn) return { name: 'Auth' }
+    if (!to.meta.requiresAuth && profileStore.isLoggedIn) return { name: 'Index' }
 })
 
 export default router

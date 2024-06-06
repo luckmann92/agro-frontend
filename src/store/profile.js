@@ -9,12 +9,12 @@ export const useProfile = defineStore(
   'profile',
   () => {
     const router = useRouter()
-    const profile = ref(useLocalStorage('user', {}));
+    const profile = ref(useLocalStorage('user', {}))
     const authToken = ref(useLocalStorage('token', null))
-    const isLoggedIn = ref(false);
-    const loadingProfile = ref(true);
+    const isLoggedIn = ref(false)
+    const loadingProfile = ref(true)
     const phone = ref('')
-    const userType = ref('');
+    const userType = ref(useLocalStorage('userType'))
     const userTypeList = ref([
       {id: 1, code: 'M', label: 'МинСельХоз'}, 
       {id: 2, code: 'K', label: 'Кандидат'}, 
@@ -57,7 +57,7 @@ export const useProfile = defineStore(
     const setUser = (data) => {
       profile.value = data
       profile.value.logged = true
-      phone.value = profile.value?.fields?.find(field => field.TYPE_ID === 'PHONE')?.VALUE
+      phone.value = data.phone
       isLoggedIn.value = true
     }
 

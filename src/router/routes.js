@@ -16,7 +16,7 @@ const routes = [
         path: '/ui',
         name: 'UI',
         meta: {
-            requiresAuth: true,
+            requiresAuth: false,
             layout: 'DefaultLayout',
             sitemap: { ignoreRoute: true },
         },
@@ -46,8 +46,8 @@ const routes = [
         path: '/auth',
         name: 'Auth',
         meta: {
-            layout: 'AuthLayout',
             requiresAuth: false,
+            layout: 'AuthLayout',
             title: 'Личный кабинет | АГРО'
         },
         component: Auth,
@@ -56,8 +56,8 @@ const routes = [
         path: '/applications',
         name: 'UserApplicationPage',
         meta: {
-            layout: 'DefaultLayout',
             requiresAuth: true,
+            layout: 'DefaultLayout',
             title: 'Заявки кандидатов | АГРО'
         },
         component: UserApplicationPage,
@@ -66,8 +66,8 @@ const routes = [
         path: '/candidates',
         name: 'UserCandidatesPage',
         meta: {
-            layout: 'DefaultLayout',
             requiresAuth: true,
+            layout: 'DefaultLayout',
             title: 'Кандидаты | АГРО'
         },
         component: UserApplicationPage,
@@ -76,8 +76,8 @@ const routes = [
         path: '/competition',
         name: 'UserCompetitionPage',
         meta: {
-            layout: 'DefaultLayout',
             requiresAuth: true,
+            layout: 'DefaultLayout',
             title: 'Конкурсы | АГРО'
         },
         component: UserCompetitionPage,
@@ -86,8 +86,8 @@ const routes = [
         path: '/k_competition',
         name: 'UserKCompetitionPage',
         meta: {
-            layout: 'DefaultLayout',
             requiresAuth: true,
+            layout: 'DefaultLayout',
             title: 'Конкурсы | АГРО'
         },
         component: UserCompetitionPage,
@@ -96,8 +96,8 @@ const routes = [
         path: '/r_competition',
         name: 'UserRCompetitionPage',
         meta: {
-            layout: 'DefaultLayout',
             requiresAuth: true,
+            layout: 'DefaultLayout',
             title: 'Конкурсы | АГРО'
         },
         component: UserCompetitionPage,
@@ -106,8 +106,8 @@ const routes = [
         path: '/competition/:id',
         name: 'UserCompetitionDetailPage',
         meta: {
-            layout: 'DefaultLayout',
             requiresAuth: true,
+            layout: 'DefaultLayout',
             title: 'Конкурс | АГРО'
         },
         component: UserCompetitionDetailPage,
@@ -116,19 +116,19 @@ const routes = [
         path: '/competition/rating/:id',
         name: 'UserCompetitionDetailRaitingPage',
         meta: {
-            layout: 'DefaultLayout',
             requiresAuth: true,
+            layout: 'DefaultLayout',
             title: 'Проставить оценки | АГРО',
             edit: true
         },
         component: UserCompetitionDetailPage,
     },
     {
-        path: '/competition/applay-for/:id',
+        path: '/k_competition/applay-for/:id',
         name: 'UserCompetitionApplayPage',
         meta: {
-            layout: 'DefaultLayout',
             requiresAuth: true,
+            layout: 'DefaultLayout',
             title: 'Подать заявку | АГРО',
             edit: true
         },
@@ -138,8 +138,8 @@ const routes = [
         path: '/competition/new',
         name: 'UserCompetitionNewPage',
         meta: {
-            layout: 'DefaultLayout',
             requiresAuth: true,
+            layout: 'DefaultLayout',
             title: 'Конкурс | АГРО'
         },
         component: UserCompetitionNewPage,
@@ -148,8 +148,8 @@ const routes = [
         path: '/documents',
         name: 'UserDocumentsPage',
         meta: {
-            layout: 'DefaultLayout',
             requiresAuth: true,
+            layout: 'DefaultLayout',
             title: 'Мои документы | АГРО'
         },
         component: UserDocumentsPage,
@@ -158,8 +158,8 @@ const routes = [
         path: '/estate',
         name: 'UserEstatePage',
         meta: {
-            layout: 'DefaultLayout',
             requiresAuth: true,
+            layout: 'DefaultLayout',
             title: 'Участки | АГРО'
         },
         component: UserEstatePage,
@@ -168,8 +168,8 @@ const routes = [
         path: '/estate/new',
         name: 'UserEstateNewPage',
         meta: {
-            layout: 'DefaultLayout',
             requiresAuth: true,
+            layout: 'DefaultLayout',
             title: 'Добавление участка | АГРО'
         },
         component: UserEstateNewPage,

@@ -139,7 +139,7 @@ export default {
     };
 
     const onSelect = (option, target) => {
-      if (toRaw(selected) === option) {
+      if (selected.value === option) {
         selected.value = null;
         target.classList.remove('select__options-item--selected');
         return;

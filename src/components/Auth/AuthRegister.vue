@@ -9,7 +9,7 @@
 			<template v-if="registerStep === 1">
 				<div class="form">
 					<div class="form__title txt-mdl">Регистрация</div>
-					<div class="form__text txt">Введите номер телефона и&nbsp;ФИО, <br> чтобы зарегестрироваться в&nbsp;сервисе</div>
+					<div class="form__text txt">Введите номер телефона и&nbsp;ФИО, <br> чтобы зарегистрироваться в&nbsp;сервисе</div>
 
           <div v-if="error?.length > 0" class="form__text form__error txt">{{ error }}</div>
 
@@ -31,7 +31,7 @@
             :disabled="fullName?.length < 1 || phone?.length < 18 || v$.fullName.$error || v$.phone.$error"
 						@click.prevent="getCode"
             :loading="step1BtnLoading"
-					>Зарегестрироваться</u-button>
+					>Зарегистрироваться</u-button>
 				</div>
 			</template>
 
@@ -57,15 +57,17 @@
 					<div v-if="currentTime > 0" class="form__text txt-sml txt-gray">
 						{{ timerText }}
 					</div>
-					<div v-else class="form__text txt-sml txt-gray" @click.prevent="auth">
+					<a v-else class="form__text txt-sml txt-gray txt-link" href="#" @click.prevent="getNewCode">
 						{{ timerText }}
-					</div>
+					</a>
 				</div>
 			</template>
 
 			<template v-else-if="registerStep === 3">
 				<div class="register-form">
 					<div class="form__title txt-mdl">Регистрация кандидата</div>
+
+          <div v-if="error?.length > 0" class="form__text form__error txt">{{ error }}</div>
 
 					<u-field-select
 						:options="regionList"
@@ -124,7 +126,7 @@ export default {
 		const router = useRouter()
     const showRegisterForm = ref(false)
     const profileStore = useProfile()
-		const { setUserType } = profileStore
+		const { setUserType, setAuthToken, setUser } = profileStore
     const fullName = ref(profileStore.profileInfo.fullName)
     const phone = ref(profileStore.profileInfo.phone)
     const registerStep = ref(1)
@@ -135,11 +137,10 @@ export default {
     const timer = ref(null)
     const currentTime = ref(60)
 
-		const region = ref(23)
-		const regionList = ref([
-			{ key: 23, value: 'Чуйская' },
-			{ key: 24, value: 'Не Чуйская' }
-		])
+		const region = ref(0)
+    const regionList = ref([
+      { key: 0, value: 'Не выбрано' }
+    ])
 		const status = ref(43)
 		const statusList = ref([
 			{ key: 43, value: 'Семхоз' },
@@ -200,6 +201,7 @@ export default {
 		})
 
 		const startTimer = () => {
+      currentTime.value = 60
       timer.value = setInterval(() => {
         currentTime.value--
       }, 1000)
@@ -208,7 +210,6 @@ export default {
     const stopTimer = () => {
       clearInterval(timer.value)
       timer.value = null
-      currentTime.value = 60
     }
 
 		const rules = {
@@ -232,17 +233,16 @@ export default {
         name: fullName.value,
         phone: phone.value.replace(/\D/g, ''),
         'g-recaptcha-response': recaptchaToken
-      }).then(res => {
+      }).then(response => {
         step1BtnLoading.value = false
-        if (res.status === 200) {
+        if (response.status === 200) {
           registerStep.value = 2
           startTimer()
         }
-      }).catch(res => {
+      }).catch(axios => {
         step1BtnLoading.value = false
-
-        if (res.status === 400) {
-          error.value = res.response.data.message
+        if (axios.response?.status === 400) {
+          error.value = axios.response.data.message
         } else {
           error.value = 'Ошибка'
         }
@@ -260,20 +260,36 @@ export default {
 		};
 
 		const verificationCode = () => {
-			console.log('code', code.value);
       axios.post('/auth/checkSmsCode', {
         phone: phone.value.replace(/\D/g, ''),
         code: Number(code.value)
-      }).then(res => {
-        if (res.status === 200) {
+      }).then(response => {
+        if (response.status === 200) {
           registerStep.value = 3
+          setUserType('K')
+          setAuthToken(response.data.access_token)
+          setUser(response.data.user)
+          error.value = ''
         }
-        console.log('auth:res', res);
-      }).catch(res => {
-        console.log('auth:res', res);
+      }).catch(axios => {
+        if (axios.response?.status === 400) {
+          error.value = axios.response.data.message
+        } else {
+          error.value = 'Ошибка'
+        }
+      })
+    }
 
-        if (res.status === 400) {
-          error.value = res.response.data.message
+    const getNewCode = () => {
+      axios.post('/auth/resendSmsCode', {}).then(response => {
+        if (response.status === 200) {
+          error.value = 'Код отправлен повторно'
+          stopTimer()
+          startTimer()
+        }
+      }).catch(axios => {
+        if (axios.response.status === 400) {
+          error.value = axios.response.data.message
         } else {
           error.value = 'Ошибка'
         }
@@ -281,16 +297,22 @@ export default {
     }
 
 		const registration = () => {
-			setUserType('K')
-			router.push('/k_competition')
-
-      // axios.post('/auth', {
-      //   phone: numPhone.value,
-      //   code: Number(code.value)
-      // })
-      //   .then(res => {
-			// 		console.log('auth:res', res);
-      //   })
+      axios.post('/user/update', {
+        region: region.value,
+        status: status.value,
+        files: files.value
+      }).then(response => {
+        if (response.status === 200) {
+          //router.push('/k_competition')
+        }
+        console.log('auth:res', response);
+      }).catch(axios => {
+        if (axios.response?.status === 400) {
+          error.value = axios.response.data.message
+        } else {
+          error.value = 'Ошибка'
+        }
+      })
     }
 
 		const timerText = computed(() => {
@@ -304,6 +326,28 @@ export default {
 		watch(currentTime, (time) => {
       if (time === 0) {
         stopTimer()
+      }
+    })
+
+    const getRegionList = () => {
+      axios.get('/region').then(response => {
+        console.log('getRegionList:res', response);
+
+        if (response.status === 200) {
+          response.data.forEach((item) => {
+            regionList.value.push({key: item.id, value: item.name})
+          })
+
+          console.log('getRegionList:regions', regionList.value)
+        }
+      }).catch(axios => {
+        console.log('getRegionList:err', axios.response?.status, axios.response?.data.message)
+      })
+    }
+
+    watch(registerStep, (step) => {
+      if (step === 3) {
+        getRegionList()
       }
     })
 
@@ -327,6 +371,7 @@ export default {
 			getCode,
 			validCode,
 			verificationCode,
+      getNewCode,
 
 			registration,
 

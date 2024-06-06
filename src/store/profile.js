@@ -40,13 +40,13 @@ export const useProfile = defineStore(
     // записать auth-token
     const setAuthToken = (token) => {
       authToken.value = token
-      axios.defaults.headers['Auth-Token'] = token
+      axios.defaults.headers['Authorization'] = `Bearer ${token}`
     }
 
     // Удалить auth-token
     const deleteAuthToken = () => {
       authToken.value = null
-      delete axios.defaults.headers['Auth-Token']
+      delete axios.defaults.headers['Authorization']
     }
 
     // записать тип пользователя
@@ -57,7 +57,7 @@ export const useProfile = defineStore(
     const setUser = (data) => {
       profile.value = data
       profile.value.logged = true
-      phone.value = profile.value?.fields?.find(field => field.TYPE_ID === 'PHONE')?.VALUE
+      phone.value = profile.value?.phone
       isLoggedIn.value = true
     }
 
@@ -86,8 +86,8 @@ export const useProfile = defineStore(
 
     // Личная информация пользователя
     const profileInfo = computed(() => ({
-      fullName: profile.value?.FULL_NAME,
-      phone: profile.value?.fields?.find(field => field.TYPE_ID === 'PHONE')?.VALUE
+      fullName: profile.value?.name,
+      phone: profile.value?.phone
     }));
 
     const updateProfile = async (data) => {}

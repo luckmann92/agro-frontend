@@ -30,7 +30,7 @@
 			</div>
 		</div>
 		<div class="register-btn">
-			<u-button @click.prevent="$emit('toRegister')">Зарегестрироваться</u-button>
+			<u-button @click.prevent="$emit('toRegister')">Зарегистрироваться</u-button>
 		</div>
 
 	</div>

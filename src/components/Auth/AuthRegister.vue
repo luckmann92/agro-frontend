@@ -11,12 +11,14 @@
 					<div class="form__title txt-mdl">Регистрация</div>
 					<div class="form__text txt">Введите номер телефона и&nbsp;ФИО, <br> чтобы зарегестрироваться в&nbsp;сервисе</div>
 
+          <div v-if="error?.length > 0" class="form__text form__error txt">{{ error }}</div>
+
 					<u-field
 						:id="'auth-phone'"
 						v-model="fullName"
 						:label="'ФИО'"
-					/>
-						<!-- :placeholder="'Джураев Абдулфато Латифович'" -->
+            :placeholder="'Джураев Абдулфато Латифович'"
+          />
 
 					<u-field-phone
 						:label="'Номер телефона'"
@@ -24,11 +26,11 @@
 						@update="updatePhone"
 					/>
 
-						<!-- :disabled="!v$.fullName.$error && !v$.phone.$error" -->
-					<u-button 
-						:variant="'dark'" 
-						:disabled="fullName?.length < 1 || phone?.length < 18"
-						@click.prevent="getCode" 
+					<u-button
+						:variant="'dark'"
+            :disabled="fullName?.length < 1 || phone?.length < 18 || v$.fullName.$error || v$.phone.$error"
+						@click.prevent="getCode"
+            :loading="step1BtnLoading"
 					>Зарегестрироваться</u-button>
 				</div>
 			</template>
@@ -37,6 +39,8 @@
 				<div class="form">
 					<div class="form__title txt-mdl">Введите SMS-код</div>
 					<div class="form__text txt txt-gray">{{ phone }}</div>
+
+          <div v-if="error?.length > 0" class="form__text form__error txt">{{ error }}</div>
 
 						<!-- :id="'auth-code'" -->
 						<!-- v-model="code" -->
@@ -90,7 +94,7 @@
 					<u-button 
 						:variant="'dark'" 
 						@click.prevent="registration"
-					>Зарегестрироваться</u-button>
+					>Зарегистрироваться</u-button>
 
 				</div>
 			</template>
@@ -124,6 +128,8 @@ export default {
     const fullName = ref(profileStore.profileInfo.fullName)
     const phone = ref(profileStore.profileInfo.phone)
     const registerStep = ref(1)
+    const step1BtnLoading = ref(false)
+    const error = ref('')
     const code = ref('')
     const codeError = ref(false)
     const timer = ref(null)
@@ -185,9 +191,8 @@ export default {
 		])
 
 		const updatePhone = (val) => {
-			console.log('updatePhone:val', val);
-			console.log('updatePhone:length', val.length);
 			phone.value = val
+			error.value = ''
 		}
 
 		const phoneValid = computed(() => {
@@ -222,20 +227,26 @@ export default {
     // }
 
 		const getCode = (recaptchaToken) => {
-			registerStep.value = 2
-			startTimer()
-      // axios.post('/auth', {
-      //   PHONE: numPhone.value,
-      //   'g-recaptcha-response': recaptchaToken
-      // }).then(res => {
-      //   if (res.status === 200) {
-      //     registerStep.value = 2
-      //     if (process.env.NODE_ENV === 'development') {
-      //       alert(res.data.data.code)
-      //     }
-      //     startTimer()
-      //   }
-      // })
+      step1BtnLoading.value = true
+      axios.post('/auth/registration', {
+        name: fullName.value,
+        phone: phone.value.replace(/\D/g, ''),
+        'g-recaptcha-response': recaptchaToken
+      }).then(res => {
+        step1BtnLoading.value = false
+        if (res.status === 200) {
+          registerStep.value = 2
+          startTimer()
+        }
+      }).catch(res => {
+        step1BtnLoading.value = false
+
+        if (res.status === 400) {
+          error.value = res.response.data.message
+        } else {
+          error.value = 'Ошибка'
+        }
+      })
     }
 
 		const updateCode = (val) => {
@@ -244,19 +255,29 @@ export default {
 		}
 
 		const validCode = (val) => {
+      error.value = ''
 			code.value = val
 		};
 
 		const verificationCode = () => {
 			console.log('code', code.value);
-			registerStep.value = 3
-      // axios.post('/auth', {
-      //   phone: numPhone.value,
-      //   code: Number(code.value)
-      // })
-      //   .then(res => {
-			// 		console.log('auth:res', res);
-      //   })
+      axios.post('/auth/checkSmsCode', {
+        phone: phone.value.replace(/\D/g, ''),
+        code: Number(code.value)
+      }).then(res => {
+        if (res.status === 200) {
+          registerStep.value = 3
+        }
+        console.log('auth:res', res);
+      }).catch(res => {
+        console.log('auth:res', res);
+
+        if (res.status === 400) {
+          error.value = res.response.data.message
+        } else {
+          error.value = 'Ошибка'
+        }
+      })
     }
 
 		const registration = () => {
@@ -291,6 +312,8 @@ export default {
       fullName,
       phone,
 			registerStep,
+      step1BtnLoading,
+			error,
 			code,
 			v$,
 

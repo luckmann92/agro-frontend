@@ -16,8 +16,8 @@ const pinia = createPinia()
 // axios defaults
 axios.defaults.headers["Content-Type"] = "application/json";
 axios.defaults.headers["Access-Control-Allow-Origins"] = "*";
-axios.defaults.withCredentials = true;
-axios.defaults.baseURL = '/api/v2/master-system';
+axios.defaults.withCredentials = false;
+axios.defaults.baseURL = 'https://minselhoz.rogsc.xyz/api/v1';
 axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
 

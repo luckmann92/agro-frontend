@@ -8,6 +8,7 @@
       v-model="phone" 
       mask="+996 (###) ### ###"
       class="field__input"
+      :placeholder="placeholder"
       @update:model-value="handlePhone"
     />
       <!-- :formatChars="{

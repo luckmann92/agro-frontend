@@ -95,9 +95,10 @@ export default {
       // Automatically focus the next input if the current one is filled
       if (pinValue.value[index].length === 1) {
         focusNext(index);
-        console.log('pinValue.value', pinValue.value);
-        emit('pinValid', pinValue.value.join(''));
       }
+
+      console.log('pinValue.value', pinValue.value);
+      emit('pinValid', pinValue.value.join(''));
     };
 
     const focusNext = (index) => {

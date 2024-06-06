@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
-// import { useProfile } from "../store/profile";
-// import { nextTick } from "vue";
+import { useProfile } from "../store/profile";
+import { nextTick } from "vue";
 import routes from "./routes";
 
 const router = createRouter({
@@ -9,16 +9,16 @@ const router = createRouter({
     routes
 })
 
-// router.afterEach((to, from) => {
-//     nextTick(() => {
-//         document.title = to.meta.title || 'Главная';
-//     });
-// });
+router.afterEach((to, from) => {
+    nextTick(() => {
+        document.title = to.meta.title || 'Главная';
+    });
+});
 
-// router.beforeEach(async (to) => {
-//     const profileStore = useProfile()
-//     if (to.meta.requiresAuth && !profileStore.isLoggedIn) return { name: 'auth' }
-//     if (!to.meta.requiresAuth && profileStore.isLoggedIn) return { name: 'index' }
-// })
+router.beforeEach(async (to) => {
+    const profileStore = useProfile()
+    // if (to.meta.requiresAuth && !profileStore.isLoggedIn) return { name: 'Auth' }
+    // if (!to.meta.requiresAuth && profileStore.isLoggedIn) return { name: 'Index' }
+})
 
 export default router

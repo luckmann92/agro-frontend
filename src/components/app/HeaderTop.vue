@@ -10,6 +10,7 @@
 
       <div class="header__nav">
         <template v-if="userType === 'M'">
+          <router-link to="/candidates">Кандидаты</router-link>
           <router-link to="/applications">Заявки кандидатов</router-link>
           <router-link to="/competition">Конкурсы</router-link>
         </template>

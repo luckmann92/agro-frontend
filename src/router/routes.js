@@ -63,6 +63,16 @@ const routes = [
         component: UserApplicationPage,
     },
     {
+        path: '/candidates',
+        name: 'UserCandidatesPage',
+        meta: {
+            layout: 'DefaultLayout',
+            requiresAuth: true,
+            title: 'Кандидаты | АГРО'
+        },
+        component: UserApplicationPage,
+    },
+    {
         path: '/competition',
         name: 'UserCompetitionPage',
         meta: {

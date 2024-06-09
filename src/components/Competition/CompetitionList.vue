@@ -4,24 +4,36 @@
   </div>
   <div class="content">
     <div class="list">
-      <competition-item v-for="item in list" :key="item.ID" :itemData="item"/>
+      <CompetitionItem 
+        v-for="item in list" 
+        :key="item.ID" 
+        :itemData="item"
+      />
     </div>
   </div>
 </template>
 
 <script>
+import { computed, ref } from "vue"
 import CompetitionItem from './CompetitionItem.vue'
+
 export default {
   name: 'CompetitionList',
-	components: {
-		CompetitionItem
-	},
+	components: { CompetitionItem },
   props: {
 		list: {
 			type: Array,
 			default: () => []
 		}
 	},
+  setup(props) {
+    // const route = useRoute()
+
+
+
+    return {
+    }
+  }
 }
 </script>
 

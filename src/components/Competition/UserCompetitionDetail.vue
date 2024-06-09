@@ -2,7 +2,9 @@
   <div class="competition-detail">
 
     <div class="competition-detail__info">
-      <div class="block-title mb-16">{{ candidatesTitle }}</div>
+      <div v-if="applay" class="block-title mb-16">Заявка</div>
+      <div v-else class="title mb-16">{{ candidatesTitle }}</div>
+
       <div class="three-col-block mb-20 txt-gray">
         <div class="txt-block">
           <p class="txt-sml">Дата начала аренды</p>
@@ -89,19 +91,20 @@
         </u-card>
       </div>
     </template>
-
   </div>
 </template>
 
 <script>
-import { computed } from "vue"
+import { computed, ref } from "vue"
 import { useRoute } from 'vue-router'
 import { declOfNum } from '@/utils'
+import { useStore } from "@/store/popup"
 import UserEstateitem from '@/components/Estates/UserEstateItem.vue'
+import MessagePopup from '@/components/app/MessagePopup.vue'
 
 export default {
   name: "UserCompetitionDetail",
-  components: { UserEstateitem },
+  components: { UserEstateitem, MessagePopup },
   props: {
     detail: Object,
     applay: Boolean,
@@ -109,11 +112,15 @@ export default {
   },
   setup(props) {
     const route = useRoute()
+    const popupStore = useStore()
+		const { open } = popupStore
     const isEdit = route.meta.edit
     const candidatesTitle = computed(() => {
       let number = props.detail?.WINNER && props.detail?.OTHER?.length ? props.detail.OTHER.length + 1 : 0
       return number ? `${number} ${declOfNum(number, ['кандидат', 'кандидата', 'кандидатов'])}` : 'Нет кандидатов'
     })
+    const sendApplayWait = ref(false)
+
 
     // console.log('detail', props.detail.ITEMS);
 
@@ -123,10 +130,19 @@ export default {
 			})
 		}
 
+    const sendApplay = () => {
+      open({
+        title: 'Заявка успешно отправлена',
+        text: 'Мы расмотрим вашу&nbsp;заявку в&nbsp;течении 3&nbsp;дней и&nbsp;уведомим вас&nbsp;о&nbsp;результате.'
+      })
+    }
+
     return {
       isEdit,
       candidatesTitle,
-      filesUpload
+      filesUpload,
+      sendApplay,
+      sendApplayWait
     }
   }
 }

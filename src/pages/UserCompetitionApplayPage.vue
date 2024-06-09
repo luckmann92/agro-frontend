@@ -2,7 +2,7 @@
   <div class="container">
     <div class="content-top">
       <u-button @click="$router.back()">Вернуться</u-button>
-      <u-button @click="$router.back()" variant="dark">Завершить</u-button>
+      <!-- <u-button v-if="isEdit" @click="$router.back()" variant="dark">Завершить</u-button> -->
     </div>
     <div class="content">
       <UserCompetitionDetail :detail="CompetitionDetail" :applay="true" :docList="docList"  />

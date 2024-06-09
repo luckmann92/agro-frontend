@@ -28,10 +28,12 @@
         </template>
       </div>
 
-      <div class="header__right">
-        <div v-if="$route.path != '/'" class="header__user">Кульбаев Марат Макашевич</div>
-        <u-button v-if="userType" @click="logout" class="header__button">Выйти</u-button>
-        <u-button v-else href="/auth" class="header__button">Войти</u-button>
+      <div v-if="$route.path != '/'" class="header__right">
+        <div class="header__user">Кульбаев Марат Макашевич</div>
+        <u-button @click="logout" class="header__button">Выйти</u-button>
+      </div>
+      <div v-else class="header__right">
+        <u-button href="/auth" class="header__button">Войти</u-button>
       </div>
 		</div>
     <div v-if="showUserType" class="user-tabs">
